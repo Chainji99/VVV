@@ -338,7 +338,10 @@
     }
 
     /* ── HIDDEN YT ── */
-    #yt{ display:none; }
+    #yt{
+      position:fixed; top:-9999px; left:-9999px;
+      width:1px; height:1px; opacity:0; pointer-events:none;
+    }
 
     /* ── REVEAL ── */
     .reveal{
@@ -717,64 +720,87 @@ function doReveal(){
 }
 
 // ──────────────────────────────────
-// YOUTUBE PLAYER
+// YOUTUBE PLAYER — pre-load on start
 // ──────────────────────────────────
 const TRACKS=[
-  {title:'Wonderwall',           ytId:'bx1Bh8ZvH84'},
+  {title:'Wonderwall',               ytId:'bx1Bh8ZvH84'},
   {title:"Don't Look Back in Anger", ytId:'cmpDDYFRBGk'},
-  {title:'Live Forever',         ytId:'EaTL_dKnCHg'},
-  {title:'Champagne Supernova',  ytId:'tI-5uKae6qc'},
-  {title:'Half the World Away',  ytId:'ZXl-2Fn4Ubs'},
+  {title:'Live Forever',             ytId:'EaTL_dKnCHg'},
+  {title:'Champagne Supernova',      ytId:'tI-5uKae6qc'},
+  {title:'Half the World Away',      ytId:'ZXl-2Fn4Ubs'},
 ];
-let ytp=null,ytReady=false,cur=-1,isPlay=false;
+let ytp=null, ytReady=false, cur=-1, isPlay=false, pendingIdx=-1;
 const tape=document.getElementById('ktape');
 
-function loadYT(){
-  if(document.getElementById('ytapi'))return;
+// Load API immediately on page load
+(function loadYTAPI(){
   const s=document.createElement('script');
-  s.id='ytapi'; s.src='https://www.youtube.com/iframe_api';
+  s.src='https://www.youtube.com/iframe_api';
   document.head.appendChild(s);
-}
-window.onYouTubeIframeAPIReady=()=>{
+})();
+
+window.onYouTubeIframeAPIReady=function(){
   ytReady=true;
   ytp=new YT.Player('yt',{
-    height:'0',width:'0',
-    playerVars:{autoplay:0,controls:0},
-    events:{onStateChange(e){
-      const S=YT.PlayerState;
-      if(e.data===S.PLAYING){isPlay=true;tape.classList.add('playing');}
-      if(e.data===S.PAUSED||e.data===S.ENDED){isPlay=false;tape.classList.remove('playing');}
-      if(e.data===S.ENDED) play((cur+1)%TRACKS.length);
-    }}
+    height:'1', width:'1',
+    playerVars:{autoplay:0, controls:0, origin:location.origin},
+    events:{
+      onReady:function(){
+        // play pending track if user clicked before API was ready
+        if(pendingIdx>=0){
+          ytp.loadVideoById(TRACKS[pendingIdx].ytId);
+          ytp.playVideo();
+          pendingIdx=-1;
+        }
+      },
+      onStateChange:function(e){
+        const S=YT.PlayerState;
+        if(e.data===S.PLAYING){
+          isPlay=true; tape.classList.add('playing');
+        }
+        if(e.data===S.PAUSED||e.data===S.ENDED){
+          isPlay=false; tape.classList.remove('playing');
+        }
+        if(e.data===S.ENDED) play((cur+1)%TRACKS.length);
+      }
+    }
   });
 };
 
-function play(idx){
-  loadYT();
+function resetButtons(){
   TRACKS.forEach((_,i)=>{
     const b=document.getElementById(`b${i}`);
     if(b){b.textContent='▶';b.classList.remove('on');}
   });
+}
+
+function play(idx){
+  // Toggle pause if same track
   if(cur===idx&&isPlay){
-    ytp?.pauseVideo(); isPlay=false; cur=-1;
+    ytp?.pauseVideo();
+    isPlay=false; cur=-1;
     tape.classList.remove('playing');
     document.getElementById('np').textContent='';
+    resetButtons();
     return;
   }
+
   cur=idx;
-  const t=TRACKS[idx];
+  resetButtons();
   const btn=document.getElementById(`b${idx}`);
   if(btn){btn.textContent='⏸';btn.classList.add('on');}
-  document.getElementById('np').textContent=`♪ ${t.title} — Oasis`;
-  if(ytReady&&ytp){
-    ytp.loadVideoById(t.ytId); ytp.playVideo();
+  document.getElementById('np').textContent=`♪ ${TRACKS[idx].title} — Oasis`;
+
+  if(ytReady&&ytp&&ytp.loadVideoById){
+    // API ready → play immediately
+    ytp.loadVideoById(TRACKS[idx].ytId);
+    ytp.playVideo();
   } else {
-    setTimeout(()=>{
-      if(ytReady&&ytp){ytp.loadVideoById(t.ytId);ytp.playVideo();}
-      else window.open(`https://www.youtube.com/watch?v=${t.ytId}`,'_blank');
-    },1800);
+    // API not ready yet → queue it, onReady will pick it up
+    pendingIdx=idx;
   }
 }
+
 
 // ──────────────────────────────────
 // SAKURA BOOM
