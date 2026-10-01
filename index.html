@@ -1,0 +1,1494 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GiftIdeas ✦ ของขวัญแห่งกำลังใจ</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=Sarabun:wght@300;400;500;600;700&family=Dancing+Script:wght@700&display=swap');
+
+    :root {
+      --gold: #f5c842;
+      --gold-light: #fde68a;
+      --rose: #f43f8e;
+      --rose-light: #fda4cf;
+      --purple: #a855f7;
+      --purple-dark: #7c3aed;
+      --teal: #14b8a6;
+      --sky: #38bdf8;
+      --coral: #fb923c;
+      --cream: #fefdf8;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Sarabun', sans-serif;
+      background: #0a0015;
+      color: #f0e6ff;
+      overflow-x: hidden;
+    }
+
+    /* ─── CANVAS PARTICLES ─── */
+    #particles { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; }
+
+    /* ─── HERO ─── */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .hero-bg {
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 80% 60% at 50% 0%, rgba(168,85,247,0.45) 0%, transparent 70%),
+        radial-gradient(ellipse 60% 50% at 10% 80%, rgba(244,63,142,0.3) 0%, transparent 60%),
+        radial-gradient(ellipse 50% 60% at 90% 60%, rgba(20,184,166,0.25) 0%, transparent 60%),
+        linear-gradient(160deg, #0a0015 0%, #130033 50%, #0d001f 100%);
+      z-index: 1;
+    }
+
+    .floating-orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(60px);
+      animation: floatOrb 8s ease-in-out infinite;
+      z-index: 1;
+    }
+    .orb1 { width: 400px; height: 400px; background: rgba(168,85,247,0.3); top: -100px; right: -100px; animation-delay: 0s; }
+    .orb2 { width: 300px; height: 300px; background: rgba(244,63,142,0.25); bottom: -80px; left: -80px; animation-delay: 3s; }
+    .orb3 { width: 200px; height: 200px; background: rgba(20,184,166,0.2); top: 40%; left: 20%; animation-delay: 5s; }
+
+    @keyframes floatOrb {
+      0%, 100% { transform: translateY(0) scale(1); }
+      50% { transform: translateY(-30px) scale(1.05); }
+    }
+
+    .hero-content {
+      position: relative; z-index: 2;
+      text-align: center;
+      padding: 2rem;
+      max-width: 900px;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(245,200,66,0.15);
+      border: 1px solid rgba(245,200,66,0.4);
+      border-radius: 50px;
+      padding: 0.4rem 1.2rem;
+      font-size: 0.85rem;
+      color: var(--gold);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 1.5rem;
+      backdrop-filter: blur(10px);
+      animation: fadeInDown 0.8s ease both;
+    }
+
+    .hero-title {
+      font-family: 'Dancing Script', cursive;
+      font-size: clamp(3rem, 8vw, 6.5rem);
+      line-height: 1.1;
+      margin-bottom: 0.5rem;
+      background: linear-gradient(135deg, #fff 0%, var(--gold-light) 40%, var(--rose-light) 70%, #c084fc 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      filter: drop-shadow(0 0 30px rgba(245,200,66,0.3));
+      animation: fadeInDown 0.8s 0.2s ease both;
+    }
+
+    .hero-subtitle {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.1rem, 3vw, 1.6rem);
+      color: rgba(240,230,255,0.8);
+      margin-bottom: 1.5rem;
+      animation: fadeInDown 0.8s 0.35s ease both;
+    }
+
+    .hero-desc {
+      font-size: 1.05rem;
+      color: rgba(240,230,255,0.6);
+      max-width: 550px;
+      margin: 0 auto 2.5rem;
+      line-height: 1.8;
+      animation: fadeInDown 0.8s 0.5s ease both;
+    }
+
+    .hero-cta {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      animation: fadeInDown 0.8s 0.65s ease both;
+    }
+
+    .btn-primary {
+      padding: 0.9rem 2.2rem;
+      background: linear-gradient(135deg, var(--purple) 0%, var(--rose) 100%);
+      color: #fff;
+      border: none;
+      border-radius: 50px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: all 0.3s ease;
+      box-shadow: 0 8px 30px rgba(168,85,247,0.4);
+      font-family: 'Sarabun', sans-serif;
+    }
+    .btn-primary:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 15px 40px rgba(168,85,247,0.6);
+    }
+
+    .btn-secondary {
+      padding: 0.9rem 2.2rem;
+      background: rgba(255,255,255,0.08);
+      color: #e9d5ff;
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 50px;
+      font-size: 1rem;
+      font-weight: 500;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: all 0.3s ease;
+      backdrop-filter: blur(10px);
+      font-family: 'Sarabun', sans-serif;
+    }
+    .btn-secondary:hover {
+      background: rgba(255,255,255,0.15);
+      transform: translateY(-3px);
+    }
+
+    /* ─── SCROLL INDICATOR ─── */
+    .scroll-hint {
+      position: absolute;
+      bottom: 2rem; left: 50%;
+      transform: translateX(-50%);
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      color: rgba(255,255,255,0.35);
+      font-size: 0.75rem;
+      letter-spacing: 0.15em;
+      animation: fadeIn 1.5s 1.2s ease both;
+    }
+    .scroll-line {
+      width: 1px; height: 50px;
+      background: linear-gradient(to bottom, rgba(255,255,255,0.3), transparent);
+      animation: scrollPulse 2s ease-in-out infinite;
+    }
+    @keyframes scrollPulse { 0%,100%{opacity:0.3;} 50%{opacity:1;} }
+
+    /* ─── QUOTE TICKER ─── */
+    .quote-ticker {
+      position: relative;
+      background: rgba(245,200,66,0.08);
+      border-top: 1px solid rgba(245,200,66,0.2);
+      border-bottom: 1px solid rgba(245,200,66,0.2);
+      overflow: hidden;
+      padding: 0.8rem 0;
+      z-index: 10;
+    }
+    .ticker-track {
+      display: flex;
+      animation: tickerScroll 40s linear infinite;
+      white-space: nowrap;
+    }
+    .ticker-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 1.5rem;
+      padding: 0 3rem;
+      color: var(--gold);
+      font-size: 0.9rem;
+      font-weight: 500;
+    }
+    .ticker-dot { color: var(--rose); font-size: 1.2rem; }
+    @keyframes tickerScroll { 0%{transform:translateX(0);} 100%{transform:translateX(-50%);} }
+
+    /* ─── SECTION COMMON ─── */
+    section { position: relative; z-index: 5; }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 4rem;
+    }
+    .section-label {
+      display: inline-block;
+      font-size: 0.78rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.8rem;
+    }
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 4vw, 3rem);
+      background: linear-gradient(135deg, #fff 0%, #e9d5ff 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 1rem;
+    }
+    .section-desc {
+      color: rgba(240,230,255,0.55);
+      max-width: 520px;
+      margin: 0 auto;
+      line-height: 1.8;
+    }
+
+    /* ─── MOOD SELECTOR ─── */
+    .mood-section {
+      padding: 6rem 2rem;
+      background: linear-gradient(180deg, #0a0015 0%, #0e001a 100%);
+    }
+    .mood-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      justify-content: center;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+    .mood-chip {
+      padding: 0.6rem 1.4rem;
+      border-radius: 50px;
+      font-size: 0.95rem;
+      cursor: pointer;
+      border: 1.5px solid;
+      transition: all 0.3s ease;
+      font-weight: 500;
+      font-family: 'Sarabun', sans-serif;
+      position: relative;
+      overflow: hidden;
+    }
+    .mood-chip::before {
+      content: '';
+      position: absolute; inset: 0;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    .mood-chip:hover, .mood-chip.active { transform: translateY(-3px) scale(1.05); }
+    .mood-chip.active { box-shadow: 0 8px 25px rgba(0,0,0,0.4); }
+
+    .chip-love     { border-color: var(--rose);   color: var(--rose-light);  background: rgba(244,63,142,0.08); }
+    .chip-hope     { border-color: var(--gold);   color: var(--gold-light);  background: rgba(245,200,66,0.08); }
+    .chip-strength { border-color: var(--purple); color: #d8b4fe;            background: rgba(168,85,247,0.08); }
+    .chip-peace    { border-color: var(--teal);   color: #99f6e4;            background: rgba(20,184,166,0.08); }
+    .chip-joy      { border-color: var(--coral);  color: #fdba74;            background: rgba(251,146,60,0.08); }
+    .chip-dream    { border-color: var(--sky);    color: #bae6fd;            background: rgba(56,189,248,0.08); }
+
+    .chip-love.active     { background: rgba(244,63,142,0.25); box-shadow: 0 8px 25px rgba(244,63,142,0.3); }
+    .chip-hope.active     { background: rgba(245,200,66,0.25); box-shadow: 0 8px 25px rgba(245,200,66,0.3); }
+    .chip-strength.active { background: rgba(168,85,247,0.25); box-shadow: 0 8px 25px rgba(168,85,247,0.3); }
+    .chip-peace.active    { background: rgba(20,184,166,0.25);  box-shadow: 0 8px 25px rgba(20,184,166,0.3); }
+    .chip-joy.active      { background: rgba(251,146,60,0.25);  box-shadow: 0 8px 25px rgba(251,146,60,0.3); }
+    .chip-dream.active    { background: rgba(56,189,248,0.25);  box-shadow: 0 8px 25px rgba(56,189,248,0.3); }
+
+    /* ─── GIFT CARDS ─── */
+    .gifts-section {
+      padding: 2rem 2rem 6rem;
+      max-width: 1300px;
+      margin: 0 auto;
+    }
+    .gifts-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1.8rem;
+    }
+
+    .gift-card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 24px;
+      overflow: hidden;
+      transition: all 0.4s cubic-bezier(0.4,0,0.2,1);
+      cursor: pointer;
+      position: relative;
+      backdrop-filter: blur(20px);
+      animation: cardFadeIn 0.6s ease both;
+    }
+    .gift-card::before {
+      content: '';
+      position: absolute; inset: 0;
+      border-radius: 24px;
+      padding: 1px;
+      background: linear-gradient(135deg, rgba(255,255,255,0.2), transparent, rgba(255,255,255,0.05));
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      pointer-events: none;
+    }
+    .gift-card:hover {
+      transform: translateY(-8px) scale(1.01);
+      border-color: rgba(255,255,255,0.2);
+      box-shadow: 0 25px 60px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.05);
+    }
+
+    .gift-card-img {
+      width: 100%; height: 200px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 5rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .gift-card-img::after {
+      content: '';
+      position: absolute; bottom: 0; left: 0; right: 0; height: 60px;
+      background: linear-gradient(to top, rgba(10,0,21,0.8), transparent);
+    }
+
+    .gift-card-body { padding: 1.4rem; }
+    .gift-card-tag {
+      display: inline-block;
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 0.25rem 0.8rem;
+      border-radius: 50px;
+      margin-bottom: 0.7rem;
+      font-weight: 600;
+    }
+    .gift-card-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.25rem;
+      color: #f0e6ff;
+      margin-bottom: 0.5rem;
+    }
+    .gift-card-desc { font-size: 0.9rem; color: rgba(240,230,255,0.55); line-height: 1.7; margin-bottom: 1.2rem; }
+    .gift-card-price {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .price { font-size: 1.2rem; font-weight: 700; }
+    .gift-card-btn {
+      padding: 0.5rem 1.2rem;
+      border-radius: 50px;
+      border: none;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-family: 'Sarabun', sans-serif;
+    }
+    .gift-card-btn:hover { transform: translateY(-2px); filter: brightness(1.15); }
+
+    @keyframes cardFadeIn { from{opacity:0;transform:translateY(20px);} to{opacity:1;transform:translateY(0);} }
+
+    /* ─── INSPIRATIONAL QUOTE WALL ─── */
+    .quotes-section {
+      padding: 6rem 2rem;
+      background: linear-gradient(180deg, #0e001a 0%, #050010 100%);
+    }
+    .quotes-wall {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.5rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .quote-card {
+      padding: 2rem;
+      border-radius: 20px;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.3s ease;
+    }
+    .quote-card:hover { transform: translateY(-5px); }
+    .quote-card::before {
+      content: '\201C';
+      position: absolute;
+      top: -0.5rem; left: 1rem;
+      font-family: 'Playfair Display', serif;
+      font-size: 6rem;
+      opacity: 0.1;
+      line-height: 1;
+    }
+    .quote-text {
+      font-size: 1rem;
+      line-height: 1.8;
+      margin-bottom: 1rem;
+      position: relative;
+      z-index: 1;
+    }
+    .quote-author {
+      font-size: 0.82rem;
+      opacity: 0.6;
+      font-style: italic;
+    }
+
+    /* ─── HOW IT WORKS ─── */
+    .how-section {
+      padding: 6rem 2rem;
+      background: linear-gradient(180deg, #050010 0%, #0a0015 100%);
+    }
+    .steps-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 2rem;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+    .step-card {
+      text-align: center;
+      padding: 2.5rem 1.5rem;
+      border-radius: 20px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.07);
+      transition: all 0.3s ease;
+    }
+    .step-card:hover {
+      background: rgba(255,255,255,0.06);
+      transform: translateY(-5px);
+    }
+    .step-icon {
+      width: 70px; height: 70px;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 2rem;
+      margin: 0 auto 1.5rem;
+    }
+    .step-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 0.75rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      opacity: 0.5;
+      margin-bottom: 0.5rem;
+    }
+    .step-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem;
+      color: #f0e6ff;
+      margin-bottom: 0.7rem;
+    }
+    .step-desc { font-size: 0.88rem; color: rgba(240,230,255,0.5); line-height: 1.7; }
+
+    /* ─── FEATURED BANNER ─── */
+    .featured-section {
+      padding: 4rem 2rem;
+      background: linear-gradient(135deg, rgba(168,85,247,0.12) 0%, rgba(244,63,142,0.12) 100%);
+      border-top: 1px solid rgba(168,85,247,0.2);
+      border-bottom: 1px solid rgba(244,63,142,0.2);
+    }
+    .featured-inner {
+      max-width: 1000px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+    @media(max-width:700px){.featured-inner{grid-template-columns:1fr;gap:2rem;}}
+    .featured-emoji { font-size: 8rem; text-align: center; filter: drop-shadow(0 0 30px rgba(245,200,66,0.5)); animation: floatOrb 4s ease-in-out infinite; }
+    .featured-tag {
+      display: inline-block;
+      background: linear-gradient(135deg, var(--gold), var(--coral));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+    .featured-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.8rem, 3vw, 2.5rem);
+      color: #fff;
+      margin-bottom: 1rem;
+      line-height: 1.3;
+    }
+    .featured-desc { color: rgba(240,230,255,0.6); line-height: 1.8; margin-bottom: 1.8rem; }
+    .featured-highlights { display: flex; flex-direction: column; gap: 0.6rem; margin-bottom: 2rem; }
+    .highlight-item {
+      display: flex; align-items: center; gap: 0.8rem;
+      font-size: 0.92rem; color: rgba(240,230,255,0.75);
+    }
+    .highlight-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+
+    /* ─── TESTIMONIALS ─── */
+    .testimonials-section {
+      padding: 6rem 2rem;
+      background: #050010;
+    }
+    .testimonials-track {
+      display: flex;
+      gap: 1.5rem;
+      max-width: 1200px;
+      margin: 0 auto;
+      overflow-x: auto;
+      padding-bottom: 1rem;
+      scrollbar-width: thin;
+      scrollbar-color: rgba(168,85,247,0.4) transparent;
+    }
+    .testimonial-card {
+      min-width: 300px;
+      padding: 2rem;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 20px;
+      flex-shrink: 0;
+      transition: transform 0.3s ease;
+    }
+    .testimonial-card:hover { transform: translateY(-5px); }
+    .stars { color: var(--gold); font-size: 1rem; margin-bottom: 1rem; letter-spacing: 0.1em; }
+    .testimonial-text { font-size: 0.92rem; line-height: 1.8; color: rgba(240,230,255,0.75); margin-bottom: 1.2rem; }
+    .testimonial-author { display: flex; align-items: center; gap: 0.8rem; }
+    .avatar { width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; }
+    .author-name { font-weight: 600; font-size: 0.9rem; }
+    .author-role { font-size: 0.78rem; color: rgba(240,230,255,0.45); }
+
+    /* ─── NEWSLETTER ─── */
+    .newsletter-section {
+      padding: 6rem 2rem;
+      text-align: center;
+      background: linear-gradient(135deg, #0a0015 0%, #130033 100%);
+      position: relative;
+      overflow: hidden;
+    }
+    .newsletter-section::before {
+      content: '';
+      position: absolute;
+      width: 600px; height: 600px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(168,85,247,0.15) 0%, transparent 70%);
+      top: 50%; left: 50%;
+      transform: translate(-50%,-50%);
+    }
+    .newsletter-inner { position: relative; z-index: 1; max-width: 500px; margin: 0 auto; }
+    .newsletter-emoji { font-size: 3.5rem; margin-bottom: 1.5rem; display: block; animation: floatOrb 3s ease-in-out infinite; }
+    .newsletter-form { display: flex; gap: 0.8rem; margin-top: 2rem; flex-wrap: wrap; justify-content: center; }
+    .newsletter-input {
+      flex: 1; min-width: 200px;
+      padding: 0.9rem 1.4rem;
+      border-radius: 50px;
+      border: 1px solid rgba(255,255,255,0.15);
+      background: rgba(255,255,255,0.08);
+      color: #f0e6ff;
+      font-size: 0.95rem;
+      outline: none;
+      backdrop-filter: blur(10px);
+      font-family: 'Sarabun', sans-serif;
+      transition: border-color 0.3s;
+    }
+    .newsletter-input:focus { border-color: var(--purple); }
+    .newsletter-input::placeholder { color: rgba(240,230,255,0.35); }
+
+    /* ─── FOOTER ─── */
+    footer {
+      padding: 3rem 2rem 2rem;
+      background: #030008;
+      border-top: 1px solid rgba(255,255,255,0.07);
+    }
+    .footer-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 3rem;
+      margin-bottom: 3rem;
+    }
+    @media(max-width:700px){.footer-inner{grid-template-columns:1fr;gap:2rem;}}
+    .footer-brand-name {
+      font-family: 'Dancing Script', cursive;
+      font-size: 1.8rem;
+      background: linear-gradient(135deg, var(--gold-light), var(--rose-light));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 0.8rem;
+    }
+    .footer-brand-desc { font-size: 0.88rem; color: rgba(240,230,255,0.45); line-height: 1.7; }
+    .footer-col-title { font-weight: 700; font-size: 0.85rem; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(240,230,255,0.5); margin-bottom: 1rem; }
+    .footer-links { display: flex; flex-direction: column; gap: 0.5rem; }
+    .footer-link { color: rgba(240,230,255,0.6); text-decoration: none; font-size: 0.9rem; transition: color 0.2s; }
+    .footer-link:hover { color: var(--gold); }
+    .footer-bottom { border-top: 1px solid rgba(255,255,255,0.06); padding-top: 1.5rem; text-align: center; color: rgba(240,230,255,0.3); font-size: 0.82rem; }
+
+    /* ─── ANIMATION UTILS ─── */
+    @keyframes fadeInDown { from{opacity:0;transform:translateY(-20px);} to{opacity:1;transform:translateY(0);} }
+    @keyframes fadeIn { from{opacity:0;} to{opacity:1;} }
+
+    .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* ─── NAV ─── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0;
+      z-index: 100;
+      padding: 1rem 2rem;
+      display: flex; align-items: center; justify-content: space-between;
+      transition: all 0.3s ease;
+    }
+    nav.scrolled {
+      background: rgba(10,0,21,0.85);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+    }
+    .nav-logo {
+      font-family: 'Dancing Script', cursive;
+      font-size: 1.8rem;
+      background: linear-gradient(135deg, var(--gold-light), var(--rose-light));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      text-decoration: none;
+    }
+    .nav-links { display: flex; gap: 2rem; align-items: center; }
+    @media(max-width:600px){.nav-links{display:none;}}
+    .nav-link { color: rgba(240,230,255,0.65); text-decoration: none; font-size: 0.92rem; transition: color 0.2s; }
+    .nav-link:hover { color: #f0e6ff; }
+    .nav-cta {
+      padding: 0.5rem 1.4rem;
+      background: linear-gradient(135deg, var(--purple), var(--rose));
+      color: #fff;
+      border-radius: 50px;
+      text-decoration: none;
+      font-size: 0.88rem;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(168,85,247,0.35);
+    }
+    .nav-cta:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(168,85,247,0.5); }
+
+    /* toast */
+    .toast {
+      position: fixed; bottom: 2rem; left: 50%; transform: translateX(-50%) translateY(100px);
+      background: linear-gradient(135deg, var(--purple-dark), var(--rose));
+      color: #fff; padding: 0.8rem 2rem;
+      border-radius: 50px;
+      font-weight: 600;
+      z-index: 999;
+      transition: transform 0.4s cubic-bezier(0.34,1.56,0.64,1);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+      font-family: 'Sarabun', sans-serif;
+    }
+    .toast.show { transform: translateX(-50%) translateY(0); }
+  </style>
+</head>
+<body>
+
+<!-- CANVAS PARTICLES -->
+<canvas id="particles"></canvas>
+
+<!-- TOAST -->
+<div class="toast" id="toast">🎁 เพิ่มในรายการแล้ว!</div>
+
+<!-- NAV -->
+<nav id="mainNav">
+  <a href="#" class="nav-logo">GiftIdeas ✦</a>
+  <div class="nav-links">
+    <a href="#gifts" class="nav-link">ของขวัญ</a>
+    <a href="#quotes" class="nav-link">แรงบันดาลใจ</a>
+    <a href="#how" class="nav-link">วิธีการ</a>
+    <a href="#newsletter" class="nav-cta">✉ รับไอเดีย</a>
+  </div>
+</nav>
+
+<!-- ─── HERO ─── -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="floating-orb orb1"></div>
+  <div class="floating-orb orb2"></div>
+  <div class="floating-orb orb3"></div>
+  <div class="hero-content">
+    <div class="hero-badge">✦ ของขวัญแห่งหัวใจ ✦</div>
+    <h1 class="hero-title">GiftIdeas</h1>
+    <p class="hero-subtitle">ส่งกำลังใจ&nbsp;·&nbsp;ส่งความรัก&nbsp;·&nbsp;ส่งความหวัง</p>
+    <p class="hero-desc">
+      เลือกของขวัญที่มีความหมายมากกว่าแค่ของ<br>
+      ทุกชิ้นคือข้อความแห่งกำลังใจจากใจของคุณ
+    </p>
+    <div class="hero-cta">
+      <a href="#gifts" class="btn-primary">🎁 เลือกของขวัญ</a>
+      <a href="#quotes" class="btn-secondary">✨ หาแรงบันดาลใจ</a>
+    </div>
+  </div>
+  <div class="scroll-hint">
+    <span>เลื่อนลง</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- ─── TICKER ─── -->
+<div class="quote-ticker">
+  <div class="ticker-track">
+    <span class="ticker-item"><span class="ticker-dot">✦</span> ความรักคือของขวัญที่ดีที่สุดในโลก</span>
+    <span class="ticker-item"><span class="ticker-dot">✦</span> Every small kindness changes someone's world</span>
+    <span class="ticker-item"><span class="ticker-dot">✦</span> ส่งกำลังใจ สร้างรอยยิ้ม</span>
+    <span class="ticker-item"><span class="ticker-dot">✦</span> You are stronger than you think</span>
+    <span class="ticker-item"><span class="ticker-dot">✦</span> ความหวังเป็นของขวัญที่ไม่มีราคา</span>
+    <span class="ticker-item"><span class="ticker-dot">✦</span> Be the reason someone smiles today</span>
+    <span class="ticker-item"><span class="ticker-dot">✦</span> ทุกวันคือโอกาสใหม่ที่สวยงาม</span>
+    <span class="ticker-item"><span class="ticker-dot">✦</span> ความรักคือของขวัญที่ดีที่สุดในโลก</span>
+    <span class="ticker-item"><span class="ticker-dot">✦</span> Every small kindness changes someone's world</span>
+    <span class="ticker-item"><span class="ticker-dot">✦</span> ส่งกำลังใจ สร้างรอยยิ้ม</span>
+    <span class="ticker-item"><span class="ticker-dot">✦</span> You are stronger than you think</span>
+    <span class="ticker-item"><span class="ticker-dot">✦</span> ความหวังเป็นของขวัญที่ไม่มีราคา</span>
+    <span class="ticker-item"><span class="ticker-dot">✦</span> Be the reason someone smiles today</span>
+    <span class="ticker-item"><span class="ticker-dot">✦</span> ทุกวันคือโอกาสใหม่ที่สวยงาม</span>
+  </div>
+</div>
+
+<!-- ─── MOOD ─── -->
+<section class="mood-section" id="mood">
+  <div class="section-header reveal">
+    <span class="section-label">✦ เลือกตามความรู้สึก ✦</span>
+    <h2 class="section-title">คุณอยากส่งกำลังใจอะไร?</h2>
+    <p class="section-desc">กรองของขวัญตามสิ่งที่ต้องการบอก</p>
+  </div>
+  <div class="mood-grid reveal">
+    <button class="mood-chip chip-love active" data-mood="love" onclick="filterMood('love',this)">💕 ความรัก</button>
+    <button class="mood-chip chip-hope" data-mood="hope" onclick="filterMood('hope',this)">🌟 ความหวัง</button>
+    <button class="mood-chip chip-strength" data-mood="strength" onclick="filterMood('strength',this)">💪 กำลังใจ</button>
+    <button class="mood-chip chip-peace" data-mood="peace" onclick="filterMood('peace',this)">🌿 ความสงบ</button>
+    <button class="mood-chip chip-joy" data-mood="joy" onclick="filterMood('joy',this)">✨ ความสุข</button>
+    <button class="mood-chip chip-dream" data-mood="dream" onclick="filterMood('dream',this)">🌙 ความฝัน</button>
+  </div>
+</section>
+
+<!-- ─── GIFTS ─── -->
+<section id="gifts">
+  <div class="gifts-section">
+    <div class="section-header reveal">
+      <span class="section-label">✦ คอลเลกชัน ✦</span>
+      <h2 class="section-title">ของขวัญที่คัดสรรพิเศษ</h2>
+      <p class="section-desc">ทุกชิ้นมีความหมาย ทุกชิ้นคือกำลังใจ</p>
+    </div>
+    <div class="gifts-grid" id="giftsGrid">
+      <!-- Cards injected by JS -->
+    </div>
+  </div>
+</section>
+
+<!-- ─── FEATURED ─── -->
+<section class="featured-section">
+  <div class="featured-inner">
+    <div class="featured-emoji">🕯️</div>
+    <div>
+      <div class="featured-tag">✦ สินค้าแนะนำ ✦</div>
+      <h2 class="featured-title">เทียนหอมแห่ง<br>ความสงบ & กำลังใจ</h2>
+      <p class="featured-desc">
+        เทียนหอมพรีเมียมที่ผสมผสานกลิ่นหอมธรรมชาติ
+        พร้อมข้อความให้กำลังใจสลักบนฝา
+        ให้แสงสว่างในวันที่มืดมนที่สุด
+      </p>
+      <div class="featured-highlights">
+        <div class="highlight-item">
+          <div class="highlight-dot" style="background:var(--gold)"></div>
+          <span>กลิ่น Sandalwood & Vanilla ผ่อนคลายอารมณ์</span>
+        </div>
+        <div class="highlight-item">
+          <div class="highlight-dot" style="background:var(--rose)"></div>
+          <span>ข้อความให้กำลังใจส่วนตัวได้ตามต้องการ</span>
+        </div>
+        <div class="highlight-item">
+          <div class="highlight-dot" style="background:var(--purple)"></div>
+          <span>แพ็กเกจจิ้งพรีเมียม พร้อมการ์ดอวยพร</span>
+        </div>
+        <div class="highlight-item">
+          <div class="highlight-dot" style="background:var(--teal)"></div>
+          <span>จุดไฟได้นาน 50+ ชั่วโมง</span>
+        </div>
+      </div>
+      <button class="btn-primary" onclick="showToast('🕯️ เพิ่มเทียนหอมแล้ว!')">🛍️ หยิบใส่ตะกร้า</button>
+    </div>
+  </div>
+</section>
+
+<!-- ─── QUOTES ─── -->
+<section class="quotes-section" id="quotes">
+  <div class="section-header reveal">
+    <span class="section-label">✦ แรงบันดาลใจ ✦</span>
+    <h2 class="section-title">คำพูดที่ให้กำลังใจ</h2>
+    <p class="section-desc">แนบข้อความเหล่านี้ไปกับของขวัญของคุณ</p>
+  </div>
+  <div class="quotes-wall" id="quotesWall"></div>
+</section>
+
+<!-- ─── HOW IT WORKS ─── -->
+<section class="how-section" id="how">
+  <div class="section-header reveal">
+    <span class="section-label">✦ ขั้นตอน ✦</span>
+    <h2 class="section-title">ส่งกำลังใจง่ายๆ 4 ขั้นตอน</h2>
+    <p class="section-desc">เราดูแลทุกรายละเอียดให้คุณ</p>
+  </div>
+  <div class="steps-grid">
+    <div class="step-card reveal">
+      <div class="step-icon" style="background:rgba(168,85,247,0.15);">🎯</div>
+      <div class="step-num">ขั้นที่ 01</div>
+      <h3 class="step-title">เลือกความรู้สึก</h3>
+      <p class="step-desc">บอกเราว่าอยากส่งกำลังใจแบบไหน ให้ใคร ในโอกาสอะไร</p>
+    </div>
+    <div class="step-card reveal">
+      <div class="step-icon" style="background:rgba(244,63,142,0.15);">💝</div>
+      <div class="step-num">ขั้นที่ 02</div>
+      <h3 class="step-title">เลือกของขวัญ</h3>
+      <p class="step-desc">เลือกจากคอลเลกชันที่คัดสรรพิเศษ หรือปรับแต่งชิ้นเองได้</p>
+    </div>
+    <div class="step-card reveal">
+      <div class="step-icon" style="background:rgba(245,200,66,0.15);">✍️</div>
+      <div class="step-num">ขั้นที่ 03</div>
+      <h3 class="step-title">เขียนข้อความ</h3>
+      <p class="step-desc">เพิ่มคำพูดให้กำลังใจจากใจของคุณ พิเศษสำหรับเขาคนนั้น</p>
+    </div>
+    <div class="step-card reveal">
+      <div class="step-icon" style="background:rgba(20,184,166,0.15);">🚀</div>
+      <div class="step-num">ขั้นที่ 04</div>
+      <h3 class="step-title">ส่งถึงมือ</h3>
+      <p class="step-desc">เราจัดส่งอย่างพิถีพิถัน พร้อมบรรจุภัณฑ์สวยงามถึงหน้าบ้าน</p>
+    </div>
+  </div>
+</section>
+
+<!-- ─── TESTIMONIALS ─── -->
+<section class="testimonials-section">
+  <div class="section-header reveal">
+    <span class="section-label">✦ รีวิว ✦</span>
+    <h2 class="section-title">เสียงจากหัวใจ</h2>
+    <p class="section-desc">ความรู้สึกจากผู้ที่ได้ส่งกำลังใจ</p>
+  </div>
+  <div class="testimonials-track" id="testimonials"></div>
+</section>
+
+<!-- ─── NEWSLETTER ─── -->
+<section class="newsletter-section" id="newsletter">
+  <div class="newsletter-inner">
+    <span class="newsletter-emoji">💌</span>
+    <div class="section-header" style="margin-bottom:0">
+      <span class="section-label">✦ รับไอเดีย ✦</span>
+      <h2 class="section-title">อย่าพลาดไอเดียดีๆ</h2>
+      <p class="section-desc">รับไอเดียของขวัญ + ข้อความให้กำลังใจ ส่งตรงถึงอีเมลคุณทุกสัปดาห์</p>
+    </div>
+    <div class="newsletter-form">
+      <input type="email" class="newsletter-input" id="emailInput" placeholder="อีเมลของคุณ" />
+      <button class="btn-primary" onclick="subscribeEmail()">✦ สมัครรับ</button>
+    </div>
+  </div>
+</section>
+
+<!-- ─── FOOTER ─── -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-brand-name">GiftIdeas ✦</div>
+      <p class="footer-brand-desc">เราเชื่อว่าทุกของขวัญคือพลังแห่งกำลังใจ<br>ที่สามารถเปลี่ยนวันธรรมดาให้พิเศษได้</p>
+    </div>
+    <div>
+      <div class="footer-col-title">สินค้า</div>
+      <div class="footer-links">
+        <a href="#" class="footer-link">ของขวัญทั้งหมด</a>
+        <a href="#" class="footer-link">คอลเลกชันใหม่</a>
+        <a href="#" class="footer-link">ปรับแต่งเอง</a>
+        <a href="#" class="footer-link">ชุดของขวัญ</a>
+      </div>
+    </div>
+    <div>
+      <div class="footer-col-title">เกี่ยวกับ</div>
+      <div class="footer-links">
+        <a href="#" class="footer-link">เรื่องของเรา</a>
+        <a href="#" class="footer-link">ปรัชญา</a>
+        <a href="#" class="footer-link">บล็อก</a>
+        <a href="#" class="footer-link">ติดต่อ</a>
+      </div>
+    </div>
+    <div>
+      <div class="footer-col-title">ช่วยเหลือ</div>
+      <div class="footer-links">
+        <a href="#" class="footer-link">การจัดส่ง</a>
+        <a href="#" class="footer-link">คืนสินค้า</a>
+        <a href="#" class="footer-link">ติดตามพัสดุ</a>
+        <a href="#" class="footer-link">FAQ</a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>✦ GiftIdeas — ส่งกำลังใจ ส่งความรัก ✦ &nbsp;|&nbsp; © 2026 สงวนลิขสิทธิ์</p>
+  </div>
+</footer>
+
+<script>
+// ─── PARTICLES ───
+const canvas = document.getElementById('particles');
+const ctx = canvas.getContext('2d');
+let W, H, particles = [];
+
+function resize() {
+  W = canvas.width = window.innerWidth;
+  H = canvas.height = window.innerHeight;
+}
+window.addEventListener('resize', resize);
+resize();
+
+const COLORS = ['rgba(168,85,247,', 'rgba(244,63,142,', 'rgba(245,200,66,', 'rgba(20,184,166,', 'rgba(56,189,248,'];
+
+class Particle {
+  constructor() { this.reset(); }
+  reset() {
+    this.x = Math.random() * W;
+    this.y = Math.random() * H + H;
+    this.size = Math.random() * 2.5 + 0.5;
+    this.speed = Math.random() * 0.8 + 0.2;
+    this.opacity = Math.random() * 0.6 + 0.1;
+    this.col = COLORS[Math.floor(Math.random() * COLORS.length)];
+    this.drift = (Math.random() - 0.5) * 0.5;
+    this.twinkle = Math.random() * Math.PI * 2;
+  }
+  update() {
+    this.y -= this.speed;
+    this.x += this.drift;
+    this.twinkle += 0.03;
+    this.opacity = (Math.sin(this.twinkle) * 0.3 + 0.5) * 0.7;
+    if (this.y < -10) this.reset();
+  }
+  draw() {
+    ctx.beginPath();
+    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+    ctx.fillStyle = this.col + this.opacity + ')';
+    ctx.fill();
+  }
+}
+
+for (let i = 0; i < 120; i++) {
+  const p = new Particle();
+  p.y = Math.random() * H;
+  particles.push(p);
+}
+
+function animParticles() {
+  ctx.clearRect(0, 0, W, H);
+  particles.forEach(p => { p.update(); p.draw(); });
+  requestAnimationFrame(animParticles);
+}
+animParticles();
+
+// ─── NAV SCROLL ───
+window.addEventListener('scroll', () => {
+  const nav = document.getElementById('mainNav');
+  nav.classList.toggle('scrolled', window.scrollY > 60);
+});
+
+// ─── DATA ───
+const giftData = [
+  { emoji:'🌸', title:'ช่อดอกไม้แห่งความรัก', desc:'ดอกไม้จากใจถึงใจ ส่งความรักและกำลังใจที่ไม่มีวันเหี่ยว', price:'฿350', mood:'love', tag:'ความรัก', tagColor:'rgba(244,63,142,0.25)', tagTextColor:'#fda4cf', bg:'linear-gradient(135deg,rgba(244,63,142,0.15),rgba(168,85,247,0.1))' },
+  { emoji:'⭐', title:'สมุดบันทึกแห่งดวงดาว', desc:'บันทึกความฝันและความหวัง ทุกหน้าคือก้าวใหม่สู่เป้าหมาย', price:'฿290', mood:'dream', tag:'ความฝัน', tagColor:'rgba(56,189,248,0.2)', tagTextColor:'#bae6fd', bg:'linear-gradient(135deg,rgba(56,189,248,0.15),rgba(124,58,237,0.1))' },
+  { emoji:'💪', title:'กล่องกำลังใจ Premium', desc:'คิวเรทกล่องพิเศษเต็มด้วยสิ่งที่บอกว่า "ฉันเชื่อมั่นในตัวเธอ"', price:'฿890', mood:'strength', tag:'กำลังใจ', tagColor:'rgba(168,85,247,0.2)', tagTextColor:'#d8b4fe', bg:'linear-gradient(135deg,rgba(168,85,247,0.15),rgba(244,63,142,0.1))' },
+  { emoji:'🍵', title:'ชุดชาสมุนไพรแห่งสันติ', desc:'ผ่อนคลายจิตใจด้วยชาธรรมชาติ 12 ชนิด พร้อมคำพูดให้กำลังใจ', price:'฿520', mood:'peace', tag:'ความสงบ', tagColor:'rgba(20,184,166,0.2)', tagTextColor:'#99f6e4', bg:'linear-gradient(135deg,rgba(20,184,166,0.15),rgba(56,189,248,0.1))' },
+  { emoji:'🌈', title:'ชุดสีน้ำแห่งความสุข', desc:'สีสันของชีวิต สร้างงานศิลปะจากจินตนาการ ผ่อนคลายอารมณ์', price:'฿450', mood:'joy', tag:'ความสุข', tagColor:'rgba(251,146,60,0.2)', tagTextColor:'#fdba74', bg:'linear-gradient(135deg,rgba(251,146,60,0.15),rgba(245,200,66,0.1))' },
+  { emoji:'🕯️', title:'เทียนหอมแห่งความหวัง', desc:'แสงสว่างในทุกค่ำคืน กลิ่นหอมที่เปลี่ยนบรรยากาศเป็นความสงบ', price:'฿680', mood:'hope', tag:'ความหวัง', tagColor:'rgba(245,200,66,0.2)', tagTextColor:'#fde68a', bg:'linear-gradient(135deg,rgba(245,200,66,0.15),rgba(251,146,60,0.1))' },
+  { emoji:'📿', title:'สร้อยข้อมือพลังงานดี', desc:'หินมงคลคัดสรร นำพาพลังงานบวก เสริมความมั่นใจทุกวัน', price:'฿750', mood:'strength', tag:'กำลังใจ', tagColor:'rgba(168,85,247,0.2)', tagTextColor:'#d8b4fe', bg:'linear-gradient(135deg,rgba(124,58,237,0.15),rgba(168,85,247,0.1))' },
+  { emoji:'🌙', title:'ของตกแต่งดวงจันทร์', desc:'ของตกแต่งรูปดวงจันทร์สำหรับคนที่มีความฝัน ส่องแสงในคืนมืด', price:'฿420', mood:'dream', tag:'ความฝัน', tagColor:'rgba(56,189,248,0.2)', tagTextColor:'#bae6fd', bg:'linear-gradient(135deg,rgba(15,23,42,0.5),rgba(56,189,248,0.1))' },
+  { emoji:'💌', title:'การ์ดข้อความจากใจ', desc:'บัตรอวยพรแฮนด์เมดพร้อมข้อความประทับใจ ของขวัญที่ราคาสูงสุด', price:'฿150', mood:'love', tag:'ความรัก', tagColor:'rgba(244,63,142,0.2)', tagTextColor:'#fda4cf', bg:'linear-gradient(135deg,rgba(244,63,142,0.12),rgba(251,146,60,0.08))' },
+];
+
+const quoteData = [
+  { text:'คุณแข็งแกร่งกว่าที่คิด กล้าหาญกว่าที่รู้สึก และฉลาดกว่าที่เชื่อ', author:'Winnie the Pooh', bg:'linear-gradient(135deg,rgba(168,85,247,0.15),rgba(244,63,142,0.1))', border:'rgba(168,85,247,0.2)' },
+  { text:'ดอกไม้ที่สวยที่สุด บานหลังจากฝนตกหนักที่สุด', author:'คำพังเพย', bg:'linear-gradient(135deg,rgba(244,63,142,0.15),rgba(245,200,66,0.1))', border:'rgba(244,63,142,0.2)' },
+  { text:'Every day may not be good, but there is something good in every day.', author:'Alice Morse Earle', bg:'linear-gradient(135deg,rgba(20,184,166,0.15),rgba(56,189,248,0.1))', border:'rgba(20,184,166,0.2)' },
+  { text:'ความฝันไม่มีอายุ คุณไม่มีวันสายเกินไปที่จะเริ่มใหม่', author:'Unknown', bg:'linear-gradient(135deg,rgba(56,189,248,0.15),rgba(168,85,247,0.1))', border:'rgba(56,189,248,0.2)' },
+  { text:'ในทุกความมืดมิด ดาวจะยังคงส่องแสง รอให้คุณมองขึ้น', author:'Unknown', bg:'linear-gradient(135deg,rgba(245,200,66,0.15),rgba(251,146,60,0.1))', border:'rgba(245,200,66,0.2)' },
+  { text:'You are enough. You have always been enough. You will always be enough.', author:'Unknown', bg:'linear-gradient(135deg,rgba(251,146,60,0.15),rgba(244,63,142,0.1))', border:'rgba(251,146,60,0.2)' },
+];
+
+const testimonialData = [
+  { text:'ซื้อกล่องกำลังใจให้เพื่อนที่กำลังท้อแท้ เขาร้องไห้เพราะซึ้งมาก ขอบคุณที่ทำให้ฉันส่งความรักได้อย่างสมบูรณ์แบบ', name:'พิมพ์ชนก', role:'Bangkok', avatar:'👩', stars:5 },
+  { text:'แพ็กเกจจิ้งสวยมากๆ ของก็ดีเกินคาด ข้อความให้กำลังใจที่แนบมาทำให้ผมน้ำตาไหลเลย', name:'ธนวัฒน์', role:'Chiang Mai', avatar:'👨', stars:5 },
+  { text:'The candle set was absolutely magical. The scent fills the room with warmth and the message card made my friend cry (happy tears!)', name:'Sarah M.', role:'Expat in Thailand', avatar:'👩‍🦰', stars:5 },
+  { text:'สั่งซื้อครั้งแรกแล้วติดใจเลย บริการดีมาก ส่งเร็ว ของสวย มีความหมาย จะกลับมาอีกแน่นอน!', name:'นุชนาฎ', role:'Pattaya', avatar:'🧕', stars:5 },
+  { text:'เป็นของขวัญที่ดีที่สุดที่เคยรับมาในชีวิต ความตั้งใจของคนส่งมันชัดมากผ่านทุกชิ้น', name:'อาทิตย์', role:'Hua Hin', avatar:'👦', stars:5 },
+];
+
+// ─── RENDER GIFTS ───
+let currentMood = 'love';
+
+function renderGifts(mood) {
+  const grid = document.getElementById('giftsGrid');
+  const filtered = mood === 'all' ? giftData : giftData.filter(g => g.mood === mood);
+  grid.innerHTML = filtered.map((g, i) => `
+    <div class="gift-card" style="animation-delay:${i * 0.08}s">
+      <div class="gift-card-img" style="background:${g.bg}">${g.emoji}</div>
+      <div class="gift-card-body">
+        <span class="gift-card-tag" style="background:${g.tagColor};color:${g.tagTextColor}">${g.tag}</span>
+        <h3 class="gift-card-title">${g.title}</h3>
+        <p class="gift-card-desc">${g.desc}</p>
+        <div class="gift-card-price">
+          <span class="price" style="color:${g.tagTextColor}">${g.price}</span>
+          <button class="gift-card-btn" style="background:${g.tagColor};color:${g.tagTextColor}" onclick="showToast('${g.emoji} ${g.title} เพิ่มแล้ว!')">🛍 หยิบใส่ตะกร้า</button>
+        </div>
+      </div>
+    </div>
+  `).join('');
+}
+
+function filterMood(mood, el) {
+  currentMood = mood;
+  document.querySelectorAll('.mood-chip').forEach(c => c.classList.remove('active'));
+  el.classList.add('active');
+  renderGifts(mood);
+}
+
+// ─── RENDER QUOTES ───
+function renderQuotes() {
+  document.getElementById('quotesWall').innerHTML = quoteData.map(q => `
+    <div class="quote-card reveal" style="background:${q.bg};border:1px solid ${q.border}">
+      <p class="quote-text">"${q.text}"</p>
+      <p class="quote-author">— ${q.author}</p>
+      <button class="gift-card-btn" style="margin-top:1rem;background:rgba(255,255,255,0.1);color:rgba(240,230,255,0.7);border:1px solid rgba(255,255,255,0.15)" onclick="copyQuote('${q.text.replace(/'/g,"\\'")}')">📋 คัดลอก</button>
+    </div>
+  `).join('');
+}
+
+function copyQuote(text) {
+  navigator.clipboard?.writeText(text).catch(()=>{});
+  showToast('📋 คัดลอกข้อความแล้ว!');
+}
+
+// ─── RENDER TESTIMONIALS ───
+function renderTestimonials() {
+  document.getElementById('testimonials').innerHTML = testimonialData.map(t => `
+    <div class="testimonial-card">
+      <div class="stars">${'★'.repeat(t.stars)}</div>
+      <p class="testimonial-text">"${t.text}"</p>
+      <div class="testimonial-author">
+        <div class="avatar" style="background:rgba(168,85,247,0.2)">${t.avatar}</div>
+        <div>
+          <div class="author-name">${t.name}</div>
+          <div class="author-role">${t.role}</div>
+        </div>
+      </div>
+    </div>
+  `).join('');
+}
+
+// ─── TOAST ───
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2800);
+}
+
+// ─── NEWSLETTER ───
+function subscribeEmail() {
+  const v = document.getElementById('emailInput').value.trim();
+  if (!v || !v.includes('@')) { showToast('⚠️ กรุณากรอกอีเมลที่ถูกต้อง'); return; }
+  showToast('💌 สมัครสำเร็จ! รอรับไอเดียดีๆ เร็วๆ นี้');
+  document.getElementById('emailInput').value = '';
+}
+
+// ─── SCROLL REVEAL ───
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.1 });
+
+function observeReveal() {
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+}
+
+// ─── INIT ───
+renderGifts('love');
+renderQuotes();
+renderTestimonials();
+setTimeout(observeReveal, 100);
+</script>
+
+<!-- ─── OASIS MUSIC PLAYER ─── -->
+<style>
+  /* ── FLOATING PLAYER BUTTON ── */
+  #musicToggleBtn {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    z-index: 9999;
+    width: 60px; height: 60px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #1a1a2e, #2d1b69);
+    border: 2px solid rgba(168,85,247,0.5);
+    color: #fff;
+    font-size: 1.5rem;
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 8px 32px rgba(168,85,247,0.5), 0 0 0 0 rgba(168,85,247,0.4);
+    transition: all 0.3s ease;
+    animation: musicPulse 2.5s ease-in-out infinite;
+  }
+  #musicToggleBtn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 12px 40px rgba(168,85,247,0.7);
+  }
+  @keyframes musicPulse {
+    0%,100% { box-shadow: 0 8px 32px rgba(168,85,247,0.5), 0 0 0 0 rgba(168,85,247,0.4); }
+    50%      { box-shadow: 0 8px 32px rgba(168,85,247,0.5), 0 0 0 12px rgba(168,85,247,0); }
+  }
+
+  /* ── PLAYER PANEL ── */
+  #musicPlayer {
+    position: fixed;
+    bottom: 6rem;
+    right: 2rem;
+    z-index: 9998;
+    width: 340px;
+    background: rgba(10,0,21,0.92);
+    backdrop-filter: blur(30px);
+    border: 1px solid rgba(168,85,247,0.35);
+    border-radius: 24px;
+    overflow: hidden;
+    box-shadow: 0 30px 80px rgba(0,0,0,0.7), 0 0 0 1px rgba(255,255,255,0.04);
+    transform: translateY(20px) scale(0.95);
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.4s cubic-bezier(0.34,1.56,0.64,1);
+  }
+  #musicPlayer.open {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+    pointer-events: all;
+  }
+
+  /* band header */
+  .mp-header {
+    padding: 1.2rem 1.4rem 0.8rem;
+    background: linear-gradient(135deg, rgba(168,85,247,0.2), rgba(244,63,142,0.15));
+    border-bottom: 1px solid rgba(255,255,255,0.07);
+    display: flex; align-items: center; gap: 0.8rem;
+  }
+  .mp-band-logo {
+    width: 44px; height: 44px; border-radius: 10px;
+    background: linear-gradient(135deg,#1d1340,#3b1f6e);
+    display:flex; align-items:center; justify-content:center;
+    font-size: 1.5rem; flex-shrink:0;
+    border: 1px solid rgba(168,85,247,0.4);
+  }
+  .mp-band-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    color: #e9d5ff;
+    font-weight: 700;
+  }
+  .mp-band-sub { font-size: 0.75rem; color: rgba(240,230,255,0.4); }
+
+  /* now playing */
+  .mp-now {
+    padding: 1rem 1.4rem;
+    background: rgba(168,85,247,0.07);
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+  }
+  .mp-now-label { font-size: 0.68rem; letter-spacing:0.15em; text-transform:uppercase; color: rgba(240,230,255,0.35); margin-bottom:0.3rem; }
+  .mp-now-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem; color: #f0e6ff; font-weight:600;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  }
+  .mp-now-album { font-size: 0.78rem; color: rgba(240,230,255,0.45); margin-top:0.15rem; }
+
+  /* visualizer bars */
+  .mp-visualizer {
+    display: flex; align-items: flex-end; gap: 3px;
+    height: 24px; margin-top: 0.6rem;
+  }
+  .mp-bar {
+    width: 4px; border-radius: 2px;
+    background: linear-gradient(to top, var(--purple), var(--rose));
+    animation: barDance 0.8s ease-in-out infinite;
+  }
+  .mp-bar:nth-child(1)  { animation-delay: 0.0s; }
+  .mp-bar:nth-child(2)  { animation-delay: 0.1s; }
+  .mp-bar:nth-child(3)  { animation-delay: 0.2s; }
+  .mp-bar:nth-child(4)  { animation-delay: 0.15s; }
+  .mp-bar:nth-child(5)  { animation-delay: 0.05s; }
+  .mp-bar:nth-child(6)  { animation-delay: 0.25s; }
+  .mp-bar:nth-child(7)  { animation-delay: 0.1s; }
+  .mp-bar:nth-child(8)  { animation-delay: 0.3s; }
+  @keyframes barDance {
+    0%,100% { height: 4px; }
+    50%      { height: 20px; }
+  }
+  .mp-bar.paused { animation-play-state: paused !important; }
+
+  /* controls */
+  .mp-controls {
+    padding: 0.8rem 1.4rem;
+    display: flex; align-items: center; justify-content: center; gap: 1rem;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+  }
+  .mp-ctrl-btn {
+    background: none; border: none; cursor: pointer;
+    color: rgba(240,230,255,0.6); font-size: 1.2rem;
+    transition: all 0.2s ease;
+    display: flex; align-items: center; justify-content: center;
+    width: 36px; height: 36px; border-radius: 50%;
+  }
+  .mp-ctrl-btn:hover { color: #f0e6ff; background: rgba(255,255,255,0.08); }
+  .mp-play-btn {
+    background: linear-gradient(135deg, var(--purple), var(--rose)) !important;
+    color: #fff !important;
+    width: 48px !important; height: 48px !important;
+    font-size: 1.3rem !important;
+    box-shadow: 0 6px 20px rgba(168,85,247,0.4);
+  }
+  .mp-play-btn:hover { transform: scale(1.08); box-shadow: 0 8px 25px rgba(168,85,247,0.6) !important; }
+
+  /* playlist */
+  .mp-playlist {
+    max-height: 220px;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(168,85,247,0.3) transparent;
+  }
+  .mp-track {
+    padding: 0.65rem 1.4rem;
+    display: flex; align-items: center; gap: 0.8rem;
+    cursor: pointer;
+    transition: background 0.2s ease;
+    border-bottom: 1px solid rgba(255,255,255,0.03);
+  }
+  .mp-track:hover { background: rgba(168,85,247,0.1); }
+  .mp-track.active { background: rgba(168,85,247,0.18); }
+  .mp-track-num {
+    width: 20px; font-size: 0.75rem;
+    color: rgba(240,230,255,0.3); text-align: center; flex-shrink:0;
+  }
+  .mp-track.active .mp-track-num { color: var(--purple); }
+  .mp-track-info { flex: 1; min-width: 0; }
+  .mp-track-name {
+    font-size: 0.88rem; font-weight: 500;
+    color: rgba(240,230,255,0.85);
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  }
+  .mp-track.active .mp-track-name { color: #e9d5ff; font-weight: 600; }
+  .mp-track-album { font-size: 0.72rem; color: rgba(240,230,255,0.35); }
+  .mp-track-dur { font-size: 0.75rem; color: rgba(240,230,255,0.3); flex-shrink:0; }
+
+  /* youtube hidden embed */
+  #ytEmbed { display: none; }
+
+  /* yt icon */
+  .yt-icon { font-size:0.8rem; opacity:0.4; }
+  .mp-footer-note {
+    padding: 0.6rem 1.4rem;
+    text-align: center;
+    font-size: 0.7rem;
+    color: rgba(240,230,255,0.25);
+    border-top: 1px solid rgba(255,255,255,0.04);
+  }
+</style>
+
+<!-- Hidden YouTube Player -->
+<div id="ytEmbed"></div>
+
+<!-- Toggle Button -->
+<button id="musicToggleBtn" onclick="togglePlayer()" title="Oasis Music Player">🎸</button>
+
+<!-- Player Panel -->
+<div id="musicPlayer">
+  <div class="mp-header">
+    <div class="mp-band-logo">🎸</div>
+    <div>
+      <div class="mp-band-name">Oasis</div>
+      <div class="mp-band-sub">Definitely Maybe · (What's the Story) Morning Glory? · Be Here Now</div>
+    </div>
+  </div>
+
+  <div class="mp-now">
+    <div class="mp-now-label">♪ กำลังเล่น</div>
+    <div class="mp-now-title" id="mpNowTitle">Wonderwall</div>
+    <div class="mp-now-album" id="mpNowAlbum">(What's the Story) Morning Glory? · 1995</div>
+    <div class="mp-visualizer" id="mpViz">
+      <div class="mp-bar paused" style="height:8px"></div>
+      <div class="mp-bar paused" style="height:14px"></div>
+      <div class="mp-bar paused" style="height:6px"></div>
+      <div class="mp-bar paused" style="height:18px"></div>
+      <div class="mp-bar paused" style="height:10px"></div>
+      <div class="mp-bar paused" style="height:16px"></div>
+      <div class="mp-bar paused" style="height:8px"></div>
+      <div class="mp-bar paused" style="height:12px"></div>
+    </div>
+  </div>
+
+  <div class="mp-controls">
+    <button class="mp-ctrl-btn" onclick="prevTrack()" title="ก่อนหน้า">⏮</button>
+    <button class="mp-ctrl-btn" onclick="toggleVolume()" id="mpVolBtn" title="เสียง">🔊</button>
+    <button class="mp-ctrl-btn mp-play-btn" onclick="togglePlay()" id="mpPlayBtn" title="เล่น/หยุด">▶</button>
+    <button class="mp-ctrl-btn" onclick="nextTrack()" title="ถัดไป">⏭</button>
+    <button class="mp-ctrl-btn" onclick="shuffleTrack()" title="สุ่มเพลง">🔀</button>
+  </div>
+
+  <div class="mp-playlist" id="mpPlaylist"></div>
+  <div class="mp-footer-note">▶ เปิด YouTube เพื่อฟังเพลง • คลิกที่เพลงเพื่อเล่น</div>
+</div>
+
+<script>
+// ─── OASIS PLAYLIST ───
+const oasisTracks = [
+  { title:'Wonderwall',             album:'(What\'s the Story) Morning Glory? · 1995', ytId:'bx1Bh8ZvH84', dur:'4:18' },
+  { title:'Don\'t Look Back in Anger', album:'(What\'s the Story) Morning Glory? · 1995', ytId:'cmpDDYFRBGk', dur:'4:47' },
+  { title:'Champagne Supernova',    album:'(What\'s the Story) Morning Glory? · 1995', ytId:'tI-5uKae6qc', dur:'7:27' },
+  { title:'Live Forever',           album:'Definitely Maybe · 1994',                    ytId:'EaTL_dKnCHg', dur:'4:36' },
+  { title:'Some Might Say',         album:'(What\'s the Story) Morning Glory? · 1995', ytId:'Jwc6pOIGMOo', dur:'5:29' },
+  { title:'Half the World Away',    album:'The Masterplan · 1998',                      ytId:'ZXl-2Fn4Ubs', dur:'4:17' },
+  { title:'Morning Glory',          album:'(What\'s the Story) Morning Glory? · 1995', ytId:'JWbaTGJzGv0', dur:'5:05' },
+  { title:'Supersonic',             album:'Definitely Maybe · 1994',                    ytId:'fRuIBB8e5rY', dur:'4:44' },
+  { title:'The Masterplan',         album:'The Masterplan · 1998',                      ytId:'tnpB9o2SxAo', dur:'5:24' },
+  { title:'Whatever',               album:'Warchild: Help · 1995',                      ytId:'5ouRqNAIL8Y', dur:'4:32' },
+  { title:'Stand by Me',            album:'Be Here Now · 1997',                         ytId:'9j9hLLUThiY', dur:'5:55' },
+  { title:'Talk Tonight',           album:'The Masterplan · 1998',                      ytId:'gbO3Kfb-GHY', dur:'4:15' },
+];
+
+let mpCurrentIdx = 0;
+let mpIsPlaying  = false;
+let mpIsMuted    = false;
+let ytPlayer     = null;
+let ytApiReady   = false;
+let playerOpen   = false;
+
+// ─── RENDER PLAYLIST ───
+function renderPlaylist() {
+  document.getElementById('mpPlaylist').innerHTML = oasisTracks.map((t, i) => `
+    <div class="mp-track ${i === mpCurrentIdx ? 'active' : ''}" onclick="selectTrack(${i})">
+      <div class="mp-track-num">${i === mpCurrentIdx && mpIsPlaying ? '♪' : i + 1}</div>
+      <div class="mp-track-info">
+        <div class="mp-track-name">${t.title}</div>
+        <div class="mp-track-album">${t.album}</div>
+      </div>
+      <div class="mp-track-dur">${t.dur}</div>
+    </div>
+  `).join('');
+}
+
+// ─── UPDATE NOW PLAYING ───
+function updateNowPlaying() {
+  const t = oasisTracks[mpCurrentIdx];
+  document.getElementById('mpNowTitle').textContent = t.title;
+  document.getElementById('mpNowAlbum').textContent  = t.album;
+  renderPlaylist();
+}
+
+// ─── TOGGLE PLAYER ───
+function togglePlayer() {
+  playerOpen = !playerOpen;
+  const panel = document.getElementById('musicPlayer');
+  panel.classList.toggle('open', playerOpen);
+  document.getElementById('musicToggleBtn').textContent = playerOpen ? '✕' : '🎸';
+  if (playerOpen && !ytApiReady) loadYouTubeAPI();
+}
+
+// ─── YOUTUBE API ───
+function loadYouTubeAPI() {
+  if (document.getElementById('ytScript')) return;
+  const s = document.createElement('script');
+  s.id  = 'ytScript';
+  s.src = 'https://www.youtube.com/iframe_api';
+  document.head.appendChild(s);
+}
+
+window.onYouTubeIframeAPIReady = function() {
+  ytApiReady = true;
+  ytPlayer = new YT.Player('ytEmbed', {
+    height: '0', width: '0',
+    videoId: oasisTracks[mpCurrentIdx].ytId,
+    playerVars: { autoplay: 0, controls: 0, modestbranding: 1 },
+    events: {
+      onStateChange: onPlayerStateChange,
+      onReady: () => {}
+    }
+  });
+};
+
+function onPlayerStateChange(e) {
+  if (e.data === YT.PlayerState.ENDED) nextTrack();
+  if (e.data === YT.PlayerState.PLAYING) {
+    mpIsPlaying = true;
+    document.getElementById('mpPlayBtn').textContent = '⏸';
+    document.querySelectorAll('.mp-bar').forEach(b => b.classList.remove('paused'));
+    renderPlaylist();
+  }
+  if (e.data === YT.PlayerState.PAUSED || e.data === YT.PlayerState.BUFFERING) {
+    if (e.data === YT.PlayerState.PAUSED) {
+      mpIsPlaying = false;
+      document.getElementById('mpPlayBtn').textContent = '▶';
+      document.querySelectorAll('.mp-bar').forEach(b => b.classList.add('paused'));
+      renderPlaylist();
+    }
+  }
+}
+
+// ─── CONTROLS ───
+function togglePlay() {
+  if (!ytApiReady || !ytPlayer) {
+    // Fallback: open YouTube in new tab
+    window.open(`https://www.youtube.com/watch?v=${oasisTracks[mpCurrentIdx].ytId}`, '_blank');
+    return;
+  }
+  const state = ytPlayer.getPlayerState();
+  if (state === YT.PlayerState.PLAYING) {
+    ytPlayer.pauseVideo();
+  } else {
+    ytPlayer.loadVideoById(oasisTracks[mpCurrentIdx].ytId);
+    ytPlayer.playVideo();
+  }
+}
+
+function prevTrack() {
+  mpCurrentIdx = (mpCurrentIdx - 1 + oasisTracks.length) % oasisTracks.length;
+  updateNowPlaying();
+  if (mpIsPlaying && ytPlayer) { ytPlayer.loadVideoById(oasisTracks[mpCurrentIdx].ytId); ytPlayer.playVideo(); }
+}
+
+function nextTrack() {
+  mpCurrentIdx = (mpCurrentIdx + 1) % oasisTracks.length;
+  updateNowPlaying();
+  if (ytPlayer) { ytPlayer.loadVideoById(oasisTracks[mpCurrentIdx].ytId); ytPlayer.playVideo(); }
+}
+
+function shuffleTrack() {
+  mpCurrentIdx = Math.floor(Math.random() * oasisTracks.length);
+  updateNowPlaying();
+  if (ytPlayer) { ytPlayer.loadVideoById(oasisTracks[mpCurrentIdx].ytId); ytPlayer.playVideo(); }
+  showToast('🔀 สุ่มเพลง: ' + oasisTracks[mpCurrentIdx].title);
+}
+
+function selectTrack(idx) {
+  mpCurrentIdx = idx;
+  updateNowPlaying();
+  if (!ytApiReady || !ytPlayer) {
+    window.open(`https://www.youtube.com/watch?v=${oasisTracks[mpCurrentIdx].ytId}`, '_blank');
+    return;
+  }
+  ytPlayer.loadVideoById(oasisTracks[mpCurrentIdx].ytId);
+  ytPlayer.playVideo();
+}
+
+function toggleVolume() {
+  if (!ytPlayer) return;
+  mpIsMuted = !mpIsMuted;
+  mpIsMuted ? ytPlayer.mute() : ytPlayer.unMute();
+  document.getElementById('mpVolBtn').textContent = mpIsMuted ? '🔇' : '🔊';
+}
+
+// ─── INIT PLAYLIST ───
+renderPlaylist();
+</script>
+</body>
+</html>
