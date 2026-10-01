@@ -1,649 +1,798 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Songs for You ✦ A Mixtape Gift</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Dancing+Script:wght@500;600;700&display=swap" rel="stylesheet" />
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>がんばって ✦ Keep Going</title>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800&family=Dancing+Script:wght@600;700&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet"/>
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+    *{margin:0;padding:0;box-sizing:border-box;}
 
-    :root {
-      --cream:    #ede8df;
-      --cream2:   #f7f0dc;
-      --tan:      #c8a87a;
-      --brown:    #5a4a3a;
+    :root{
+      --pink:     #f4b8cb;
+      --pink-d:   #e8839e;
+      --pink-l:   #fde8ef;
+      --lav:      #c8b4e8;
+      --lav-l:    #ede4f8;
+      --mint:     #a8ddc4;
+      --peach:    #f8d4b0;
+      --cream:    #fef6f8;
+      --white:    #ffffff;
+      --text:     #3d2040;
+      --muted:    #b890a0;
       --sage:     #8fa888;
-      --sage-dk:  #6a8060;
-      --muted:    #a89070;
-      --rose:     #b05070;
-      --leaf:     #c8d4b0;
     }
 
-    html { scroll-behavior: smooth; }
-    body {
-      font-family: 'Cormorant Garamond', Georgia, serif;
+    html{ scroll-behavior:smooth; }
+
+    body{
+      font-family:'Nunito',sans-serif;
       background: var(--cream);
-      min-height: 100vh;
-      overflow-x: hidden;
+      min-height:100vh;
+      overflow-x:hidden;
     }
 
-    /* ── FLOWER BURST ── */
-    .petal {
-      position: fixed;
-      pointer-events: none;
-      z-index: 9999;
-      animation: petalFly 1.3s ease-out forwards;
-      user-select: none;
-      line-height: 1;
+    /* ── SAKURA PETALS (background) ── */
+    .bg-petal{
+      position:fixed; pointer-events:none; z-index:0;
+      font-size:1rem; opacity:0;
+      animation: bgFall linear infinite;
     }
-    @keyframes petalFly {
-      0%   { transform: translate(0,0) scale(0.2) rotate(0deg); opacity: 1; }
-      60%  { opacity: 1; }
-      100% { transform: translate(var(--tx), var(--ty)) scale(1.1) rotate(var(--tr)); opacity: 0; }
+    @keyframes bgFall{
+      0%  { transform:translateX(0) rotate(0deg); opacity:.35; top:-40px; }
+      100%{ transform:translateX(60px) rotate(360deg); opacity:0;  top:110vh; }
     }
 
-    /* ── ENVELOPE SCREEN ── */
-    #env-screen {
-      position: fixed; inset: 0;
-      background: var(--cream);
-      display: flex; flex-direction: column;
-      align-items: center; justify-content: center;
-      z-index: 200;
-      cursor: pointer;
-      /* subtle linen texture */
-      background-image:
-        repeating-linear-gradient(0deg,   rgba(180,160,130,.04) 0px, rgba(180,160,130,.04) 1px, transparent 1px, transparent 28px),
-        repeating-linear-gradient(90deg,  rgba(180,160,130,.04) 0px, rgba(180,160,130,.04) 1px, transparent 1px, transparent 28px);
+    /* ── BURST PETALS ── */
+    .burst{
+      position:fixed; pointer-events:none; z-index:9999;
+      animation:burstFly 1.2s ease-out forwards;
+      line-height:1;
     }
-    #env-screen.fade-out {
-      animation: envFade 0.9s ease forwards;
-      pointer-events: none;
-    }
-    @keyframes envFade {
-      0%   { opacity:1; transform:scale(1); }
-      40%  { opacity:.6; transform:scale(1.04); }
-      100% { opacity:0; transform:scale(.9) translateY(-20px); }
+    @keyframes burstFly{
+      0%  { transform:translate(0,0) scale(.1) rotate(0deg); opacity:1; }
+      65% { opacity:1; }
+      100%{ transform:translate(var(--bx),var(--by)) scale(1.2) rotate(var(--br)); opacity:0; }
     }
 
-    .env-float {
-      animation: envFloat 3s ease-in-out infinite;
-      position: relative;
-      width: 220px; height: 155px;
-      filter: drop-shadow(0 12px 30px rgba(0,0,0,.12));
+    /* ═══════════════════════════
+       GIFT BOX SCREEN
+    ═══════════════════════════ */
+    #gift-screen{
+      position:fixed; inset:0; z-index:200;
+      background: radial-gradient(ellipse at 50% 40%, #fde0ec 0%, #f8e8f0 50%, #f2e0f0 100%);
+      display:flex; flex-direction:column;
+      align-items:center; justify-content:center;
+      cursor:pointer;
+      overflow:hidden;
     }
-    @keyframes envFloat {
-      0%,100% { transform: translateY(0) rotate(-1deg); }
-      50%     { transform: translateY(-10px) rotate(1deg); }
+    #gift-screen.bye{
+      animation: screenBye .85s ease forwards;
+      pointer-events:none;
+    }
+    @keyframes screenBye{
+      0%  { opacity:1; transform:scale(1); }
+      40% { opacity:.7; transform:scale(1.05); }
+      100%{ opacity:0; transform:scale(.88) translateY(-15px); }
     }
 
-    /* envelope SVG is inline below */
-    .tap-hint {
-      margin-top: 2.2rem;
-      font-family: 'Dancing Script', cursive;
-      font-size: 1.4rem;
-      color: var(--rose);
-      letter-spacing: .04em;
-      animation: tapPulse 2.2s ease-in-out infinite;
+    /* gift box */
+    .gbox-wrap{
+      position:relative;
+      width:180px; height:190px;
+      animation:gboxFloat 2.8s ease-in-out infinite;
+      filter:drop-shadow(0 18px 30px rgba(244,132,163,.35));
     }
-    @keyframes tapPulse { 0%,100%{opacity:.55;} 50%{opacity:1;} }
+    @keyframes gboxFloat{
+      0%,100%{ transform:translateY(0) rotate(-1.5deg); }
+      50%    { transform:translateY(-12px) rotate(1.5deg); }
+    }
 
-    /* ── MAIN CONTENT ── */
-    #main {
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 1s ease .4s;
+    /* sparkles around box */
+    .spark{
+      position:absolute; font-size:.9rem;
+      animation:sparkle 2s ease-in-out infinite;
+    }
+    @keyframes sparkle{
+      0%,100%{ opacity:0; transform:scale(.5) rotate(0deg); }
+      50%    { opacity:1; transform:scale(1.1) rotate(20deg); }
+    }
+
+    .open-hint{
+      margin-top:2.2rem;
+      font-family:'Dancing Script',cursive;
+      font-size:1.5rem;
+      color:#c05878;
+      letter-spacing:.04em;
+      animation:hintBounce 1.8s ease-in-out infinite;
+    }
+    @keyframes hintBounce{
+      0%,100%{ transform:translateY(0); opacity:.7; }
+      50%    { transform:translateY(-5px); opacity:1; }
+    }
+
+    /* ═══════════════════════════
+       MAIN PAGE
+    ═══════════════════════════ */
+    #main{
+      opacity:0; pointer-events:none;
+      transition:opacity .9s ease .3s;
+      min-height:100vh;
       background:
-        radial-gradient(ellipse 60% 40% at 5% 15%, rgba(200,210,180,.25) 0%, transparent 60%),
-        radial-gradient(ellipse 50% 35% at 95% 85%, rgba(200,170,140,.2) 0%, transparent 55%),
+        radial-gradient(ellipse 70% 40% at 0% 0%,   rgba(244,184,203,.28) 0%, transparent 55%),
+        radial-gradient(ellipse 55% 35% at 100% 100%, rgba(200,180,232,.22) 0%, transparent 55%),
         var(--cream);
-      /* subtle botanical bg pattern */
-      background-image:
-        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cellipse cx='20' cy='30' rx='6' ry='14' fill='%23c8d4b0' opacity='.18' transform='rotate(-20 20 30)'/%3E%3Cellipse cx='100' cy='90' rx='5' ry='12' fill='%23c0cca8' opacity='.15' transform='rotate(25 100 90)'/%3E%3Cellipse cx='60' cy='10' rx='4' ry='10' fill='%23bcc8a4' opacity='.13' transform='rotate(10 60 10)'/%3E%3C/svg%3E"),
-        radial-gradient(ellipse 60% 40% at 5% 15%, rgba(200,210,180,.2) 0%, transparent 55%),
-        var(--cream);
-      min-height: 100vh;
-      padding: 3.5rem 1.5rem 5rem;
+      padding:3rem 1.2rem 5rem;
+      position:relative; z-index:1;
     }
-    #main.show { opacity: 1; pointer-events: all; }
+    #main.show{ opacity:1; pointer-events:all; }
 
-    .inner { max-width: 820px; margin: 0 auto; }
+    .inner{ max-width:660px; margin:0 auto; }
 
-    .from-to {
-      font-size: .72rem;
-      letter-spacing: .22em;
-      text-transform: uppercase;
-      color: var(--muted);
-      margin-bottom: .35rem;
+    /* header tag */
+    .kawaii-tag{
+      display:inline-flex; align-items:center; gap:.5rem;
+      background:var(--pink);
+      color:#fff;
+      font-size:.72rem; font-weight:700;
+      letter-spacing:.18em; text-transform:uppercase;
+      padding:.3rem 1rem; border-radius:50px;
+      margin-bottom:1rem;
+      box-shadow:0 4px 12px rgba(244,140,175,.35);
     }
-    .page-title {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(2.6rem, 7vw, 4.2rem);
-      color: var(--brown);
-      line-height: 1.05;
-      margin-bottom: 2.8rem;
+    .page-title{
+      font-family:'Dancing Script',cursive;
+      font-size:clamp(2.2rem,7vw,3.6rem);
+      color:var(--text);
+      line-height:1.15;
+      margin-bottom:.4rem;
     }
-
-    /* ── CASSETTE ── */
-    .cassette-wrap {
-      display: flex;
-      justify-content: center;
-      margin-bottom: 2.8rem;
-    }
-    #cassette {
-      width: 100%;
-      max-width: 500px;
-      filter: drop-shadow(0 16px 45px rgba(0,0,0,.14));
-      cursor: pointer;
-      transition: transform .35s cubic-bezier(.34,1.56,.64,1);
-    }
-    #cassette:hover { transform: translateY(-6px) rotate(-1.2deg) scale(1.01); }
-
-    /* Reel spin */
-    #rl, #rr {
-      transform-box: fill-box;
-      transform-origin: center;
-      animation: spin 2.8s linear infinite paused;
-    }
-    .playing #rl { animation-play-state: running; }
-    .playing #rr { animation-play-state: running; animation-direction: reverse; }
-    @keyframes spin { to { transform: rotate(360deg); } }
-
-    /* ── BOTTOM GRID ── */
-    .grid2 {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 2rem;
-      margin-bottom: 3rem;
-    }
-    @media(max-width:600px){ .grid2 { grid-template-columns: 1fr; } }
-
-    /* playlist */
-    .track {
-      display: flex; align-items: center; gap: .9rem;
-      padding: .75rem .6rem;
-      border-bottom: 1px solid rgba(160,140,110,.18);
-      cursor: pointer;
-      border-radius: 8px;
-      transition: background .2s;
-    }
-    .track:hover { background: rgba(180,160,130,.1); }
-    .track-num {
-      font-size: .72rem; color: var(--muted);
-      width: 22px; flex-shrink: 0; font-style: italic;
-    }
-    .track-info { flex: 1; min-width: 0; }
-    .track-name {
-      font-family: 'Playfair Display', serif;
-      font-weight: 600; font-size: .98rem; color: var(--brown);
-      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
-    }
-    .track-artist { font-size: .78rem; color: var(--muted); }
-    .pbtn {
-      width: 34px; height: 34px; border-radius: 50%;
-      border: 1.5px solid var(--brown);
-      background: none; cursor: pointer;
-      display: flex; align-items: center; justify-content: center;
-      color: var(--brown); font-size: .8rem;
-      transition: all .2s ease; flex-shrink: 0;
-    }
-    .pbtn:hover { background: var(--brown); color: var(--cream); }
-    .pbtn.on { background: var(--sage-dk); border-color: var(--sage-dk); color: #fff; }
-    .np-label {
-      font-size: .76rem; color: var(--muted);
-      font-style: italic; margin-top: .7rem;
-      min-height: 1.1em;
+    .page-sub{
+      font-size:.88rem; color:var(--muted);
+      font-style:italic; margin-bottom:2.5rem;
+      letter-spacing:.05em;
     }
 
-    /* liner note */
-    .liner {
-      background: var(--cream2);
-      border-radius: 4px;
-      padding: 1.8rem 1.6rem;
-      box-shadow: 3px 5px 20px rgba(0,0,0,.07), inset 0 0 0 1px rgba(190,170,110,.18);
-      position: relative;
+    /* ── CASSETTE (kawaii) ── */
+    .tape-wrap{
+      display:flex; justify-content:center;
+      margin-bottom:2.5rem;
     }
-    .liner::before {
-      content: '';
-      position: absolute; top: 0; left: 0; right: 0;
-      height: 3px;
-      background: linear-gradient(90deg, transparent, rgba(180,160,100,.25), transparent);
+    #ktape{
+      width:100%; max-width:480px;
+      filter:drop-shadow(0 14px 35px rgba(244,140,175,.3));
+      cursor:pointer;
+      transition:transform .35s cubic-bezier(.34,1.56,.64,1);
     }
-    .liner-label {
-      font-size: .62rem; letter-spacing: .25em; text-transform: uppercase;
-      color: var(--muted); margin-bottom: 1rem;
+    #ktape:hover{ transform:translateY(-6px) scale(1.02) rotate(.8deg); }
+
+    /* reel spin */
+    #kr1,#kr2{
+      transform-box:fill-box;
+      transform-origin:center;
+      animation:reelSpin 2.5s linear infinite paused;
     }
-    .liner-body {
-      font-size: 1.05rem; color: #3a2e22;
-      line-height: 2; font-style: italic;
+    #kr2{ animation-direction:reverse; }
+    .playing #kr1,.playing #kr2{ animation-play-state:running; }
+    @keyframes reelSpin{ to{ transform:rotate(360deg); } }
+
+    /* ── CARDS ── */
+    .cards-grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:1.2rem;
+      margin-bottom:2rem;
+    }
+    @media(max-width:560px){ .cards-grid{ grid-template-columns:1fr; } }
+
+    /* playlist card */
+    .playlist-card{
+      background:#fff;
+      border-radius:20px;
+      padding:1.4rem 1.2rem;
+      box-shadow:0 6px 24px rgba(244,140,175,.15), 0 0 0 1.5px rgba(244,184,203,.35);
+    }
+    .playlist-title{
+      font-size:.68rem; font-weight:700;
+      letter-spacing:.2em; text-transform:uppercase;
+      color:var(--pink-d); margin-bottom:1rem;
+      display:flex; align-items:center; gap:.4rem;
     }
 
-    /* ── BOUQUET ── */
-    .bouquet-section { text-align: center; }
-    .bouquet-label-top {
-      font-size: .65rem; letter-spacing: .22em; text-transform: uppercase;
-      color: var(--muted); margin-bottom: 1.2rem;
+    .track{
+      display:flex; align-items:center; gap:.8rem;
+      padding:.6rem .5rem; border-radius:12px;
+      cursor:pointer; transition:background .2s;
     }
-    .bouquet-btn {
-      display: inline-flex; flex-direction: column;
-      align-items: center; justify-content: center;
-      gap: .5rem;
-      width: 140px; height: 140px;
-      border-radius: 50%;
-      background: rgba(180,160,130,.08);
-      border: 1.5px dashed rgba(180,160,130,.3);
-      cursor: pointer;
-      transition: all .3s ease;
-      position: relative;
-      overflow: visible;
+    .track:hover{ background:var(--pink-l); }
+    .track-num{
+      font-size:.7rem; color:var(--muted);
+      width:18px; flex-shrink:0; font-weight:700;
     }
-    .bouquet-btn:hover { background: rgba(180,160,130,.17); transform: scale(1.05); }
-    .bouquet-emoji {
-      font-size: 3.2rem; line-height: 1;
-      animation: bFloat 3.5s ease-in-out infinite;
-      display: block;
-      transition: transform .3s ease;
+    .track-info{ flex:1; min-width:0; }
+    .track-name{
+      font-weight:700; font-size:.9rem;
+      color:var(--text);
+      white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
     }
-    @keyframes bFloat {
-      0%,100% { transform: translateY(0) rotate(-4deg); }
-      50%      { transform: translateY(-8px) rotate(4deg); }
+    .track-mood{ font-size:.72rem; color:var(--muted); }
+    .pbtn{
+      width:30px; height:30px; border-radius:50%;
+      border:2px solid var(--pink);
+      background:none; cursor:pointer;
+      display:flex; align-items:center; justify-content:center;
+      color:var(--pink); font-size:.75rem; flex-shrink:0;
+      transition:all .2s ease;
     }
-    .bouquet-tap {
-      font-size: .68rem; letter-spacing: .15em; text-transform: uppercase;
-      color: var(--muted);
+    .pbtn:hover{ background:var(--pink); color:#fff; }
+    .pbtn.on{ background:var(--lav); border-color:var(--lav); color:#fff; }
+    .np-label{
+      font-size:.72rem; color:var(--muted);
+      font-style:italic; margin-top:.8rem;
+      min-height:1em; padding:0 .5rem;
     }
 
-    /* ── HIDDEN PLAYER ── */
-    #yt { display: none; }
+    /* note card */
+    .note-card{
+      background:#fff;
+      border-radius:20px;
+      padding:1.4rem 1.4rem 1.6rem;
+      box-shadow:0 6px 24px rgba(200,180,232,.18), 0 0 0 1.5px rgba(200,180,232,.3);
+      position:relative; overflow:hidden;
+    }
+    /* ruled lines */
+    .note-card::before{
+      content:'';
+      position:absolute; inset:0;
+      background:repeating-linear-gradient(
+        180deg,
+        transparent 0px, transparent 27px,
+        rgba(200,184,232,.18) 27px, rgba(200,184,232,.18) 28px
+      );
+      pointer-events:none;
+    }
+    .note-label{
+      font-size:.68rem; font-weight:700;
+      letter-spacing:.2em; text-transform:uppercase;
+      color:var(--lav); margin-bottom:.9rem;
+      position:relative; z-index:1;
+      display:flex; align-items:center; gap:.4rem;
+    }
+    .note-body{
+      font-size:.97rem; color:var(--text);
+      line-height:2; position:relative; z-index:1;
+      font-weight:500;
+    }
+    /* washi tape decoration */
+    .washi{
+      position:absolute; top:-4px; right:18px;
+      width:52px; height:22px; border-radius:3px;
+      background:repeating-linear-gradient(
+        45deg,
+        var(--pink-l) 0px, var(--pink-l) 5px,
+        rgba(244,184,203,.5) 5px, rgba(244,184,203,.5) 10px
+      );
+      opacity:.85;
+    }
 
-    /* ── SCROLL REVEAL ── */
-    .reveal { opacity: 0; transform: translateY(24px); transition: opacity .7s ease, transform .7s ease; }
-    .reveal.in { opacity: 1; transform: none; }
+    /* ── STICKER ROW ── */
+    .stickers{
+      display:flex; gap:.8rem; flex-wrap:wrap;
+      justify-content:center;
+      margin-bottom:2rem;
+    }
+    .sticker{
+      background:#fff;
+      border-radius:16px;
+      padding:.6rem 1rem;
+      font-size:.8rem; font-weight:600;
+      color:var(--text);
+      box-shadow:0 4px 14px rgba(244,140,175,.15), 0 0 0 1.5px rgba(244,184,203,.3);
+      display:flex; align-items:center; gap:.4rem;
+      animation:stickerWobble 3s ease-in-out infinite;
+      cursor:default;
+    }
+    .sticker:nth-child(2){ animation-delay:.4s; }
+    .sticker:nth-child(3){ animation-delay:.8s; }
+    .sticker:nth-child(4){ animation-delay:1.2s; }
+    @keyframes stickerWobble{
+      0%,100%{ transform:rotate(-1.5deg) translateY(0); }
+      50%    { transform:rotate(1.5deg) translateY(-3px); }
+    }
+
+    /* ── SAKURA BUTTON ── */
+    .sakura-section{ text-align:center; margin-top:.5rem; }
+    .sakura-sub{
+      font-size:.7rem; font-weight:600;
+      letter-spacing:.18em; text-transform:uppercase;
+      color:var(--muted); margin-bottom:1.2rem;
+    }
+    .sakura-btn{
+      display:inline-flex; flex-direction:column;
+      align-items:center; justify-content:center; gap:.4rem;
+      width:130px; height:130px; border-radius:50%;
+      background:linear-gradient(135deg, var(--pink-l), var(--lav-l));
+      border:2.5px solid var(--pink);
+      cursor:pointer;
+      box-shadow:0 8px 25px rgba(244,140,175,.25);
+      transition:all .3s cubic-bezier(.34,1.56,.64,1);
+    }
+    .sakura-btn:hover{
+      transform:scale(1.08);
+      box-shadow:0 12px 35px rgba(244,140,175,.4);
+    }
+    .sakura-emoji{
+      font-size:2.8rem; line-height:1;
+      animation:sakuraFloat 3s ease-in-out infinite;
+      display:block;
+      transition:transform .3s ease;
+    }
+    @keyframes sakuraFloat{
+      0%,100%{ transform:rotate(-5deg) scale(1); }
+      50%    { transform:rotate(5deg) scale(1.05) translateY(-4px); }
+    }
+    .sakura-hint{
+      font-size:.65rem; font-weight:700;
+      letter-spacing:.12em; text-transform:uppercase;
+      color:var(--pink-d);
+    }
+
+    /* ── HIDDEN YT ── */
+    #yt{ display:none; }
+
+    /* ── REVEAL ── */
+    .reveal{
+      opacity:0; transform:translateY(22px);
+      transition:opacity .65s ease, transform .65s ease;
+    }
+    .reveal.in{ opacity:1; transform:none; }
   </style>
 </head>
 <body>
 
-<!-- ───────── PETAL CONTAINER ───────── -->
-<div id="petals" style="position:fixed;inset:0;pointer-events:none;z-index:9999;overflow:hidden"></div>
+<!-- ── BACKGROUND SAKURA PETALS ── -->
+<div id="bgPetals"></div>
 
-<!-- ───────── ENVELOPE SCREEN ───────── -->
-<div id="env-screen" onclick="openEnvelope(event)">
-  <div class="env-float">
-    <svg viewBox="0 0 220 155" xmlns="http://www.w3.org/2000/svg" width="220" height="155">
-      <!-- Shadow -->
-      <ellipse cx="110" cy="150" rx="90" ry="8" fill="rgba(0,0,0,.08)"/>
-      <!-- Body -->
-      <rect x="0" y="40" width="220" height="115" rx="6" fill="#d4b896"/>
-      <!-- Bottom fold L -->
-      <polygon points="0,155 110,90 0,40" fill="#c8a87a"/>
-      <!-- Bottom fold R -->
-      <polygon points="220,155 110,90 220,40" fill="#c2a070"/>
-      <!-- Flap closed -->
-      <polygon id="env-flap" points="0,40 110,100 220,40" fill="#c8a87a" style="transform-origin:110px 40px;transition:transform .6s ease"/>
-      <!-- Flap border -->
-      <line x1="0" y1="40" x2="220" y2="40" stroke="#b89060" stroke-width="1" opacity=".5"/>
-      <!-- Wax seal -->
-      <circle cx="110" cy="100" r="16" fill="#9b7ec8" opacity=".9"/>
-      <circle cx="110" cy="100" r="11" fill="#8b6ec0" opacity=".8"/>
-      <text x="110" y="105" text-anchor="middle" font-size="10" fill="white">✿</text>
-      <!-- Flap flowers -->
-      <text x="85"  y="62" font-size="13" opacity=".85">🌸</text>
-      <text x="110" y="55" font-size="11" opacity=".8">🌿</text>
-      <text x="130" y="63" font-size="12" opacity=".8">💜</text>
+<!-- ── BURST CONTAINER ── -->
+<div id="burstBox" style="position:fixed;inset:0;pointer-events:none;z-index:9999;overflow:hidden"></div>
+
+<!-- ═══════════════════════════
+     GIFT BOX SCREEN
+═══════════════════════════ -->
+<div id="gift-screen" onclick="openGift(event)">
+
+  <!-- floating sparkles -->
+  <span class="spark" style="top:20%;left:25%;animation-delay:.2s">✨</span>
+  <span class="spark" style="top:15%;right:28%;animation-delay:.7s">⭐</span>
+  <span class="spark" style="top:65%;left:18%;animation-delay:1.1s">💫</span>
+  <span class="spark" style="top:70%;right:20%;animation-delay:.4s">✨</span>
+  <span class="spark" style="top:40%;left:10%;animation-delay:.9s">🌸</span>
+  <span class="spark" style="top:38%;right:8%; animation-delay:.3s">🌸</span>
+
+  <div class="gbox-wrap">
+    <svg viewBox="0 0 180 190" xmlns="http://www.w3.org/2000/svg" width="180" height="190">
+      <!-- shadow -->
+      <ellipse cx="90" cy="182" rx="68" ry="9" fill="rgba(244,140,175,.2)"/>
+
+      <!-- box body -->
+      <rect x="18" y="85" width="144" height="95" rx="10" fill="#f4b8cb"/>
+      <!-- box body shine -->
+      <rect x="18" y="85" width="144" height="20" rx="10" fill="#f8ccd8" opacity=".6"/>
+      <!-- polka dots on box -->
+      <circle cx="38"  cy="110" r="5" fill="#f8d8e4" opacity=".7"/>
+      <circle cx="60"  cy="125" r="4" fill="#f8d8e4" opacity=".6"/>
+      <circle cx="82"  cy="108" r="5" fill="#f8d8e4" opacity=".7"/>
+      <circle cx="115" cy="120" r="4" fill="#f8d8e4" opacity=".6"/>
+      <circle cx="140" cy="105" r="5" fill="#f8d8e4" opacity=".7"/>
+      <circle cx="50"  cy="145" r="4" fill="#f8d8e4" opacity=".6"/>
+      <circle cx="130" cy="148" r="5" fill="#f8d8e4" opacity=".7"/>
+      <circle cx="95"  cy="155" r="4" fill="#f8d8e4" opacity=".6"/>
+
+      <!-- ribbon vertical -->
+      <rect x="82" y="85" width="16" height="95" rx="4" fill="#e8839e" opacity=".85"/>
+      <!-- ribbon horizontal -->
+      <rect x="18" y="122" width="144" height="16" rx="4" fill="#e8839e" opacity=".85"/>
+
+      <!-- lid -->
+      <rect x="12" y="68" width="156" height="28" rx="10" fill="#f8c8d8"/>
+      <!-- lid shine -->
+      <rect x="12" y="68" width="156" height="14" rx="10" fill="#fce0ea" opacity=".6"/>
+      <!-- lid ribbon -->
+      <rect x="82" y="68" width="16" height="28" rx="4" fill="#e8839e" opacity=".85"/>
+
+      <!-- bow left loop -->
+      <ellipse cx="68" cy="62" rx="26" ry="18" fill="#f4a0c0" transform="rotate(-18 68 62)"/>
+      <ellipse cx="68" cy="62" rx="16" ry="10" fill="#f8bcd0" opacity=".6" transform="rotate(-18 68 62)"/>
+      <!-- bow right loop -->
+      <ellipse cx="112" cy="62" rx="26" ry="18" fill="#f4a0c0" transform="rotate(18 112 62)"/>
+      <ellipse cx="112" cy="62" rx="16" ry="10" fill="#f8bcd0" opacity=".6" transform="rotate(18 112 62)"/>
+      <!-- bow center knot -->
+      <ellipse cx="90" cy="66" rx="14" ry="11" fill="#e8839e"/>
+      <ellipse cx="90" cy="66" rx="8"  ry="6"  fill="#f0a0ba" opacity=".7"/>
+
+      <!-- small flowers on lid -->
+      <text x="28"  y="88" font-size="12">🌸</text>
+      <text x="138" y="88" font-size="12">🌸</text>
+      <text x="82"  y="58" font-size="10">✿</text>
     </svg>
   </div>
-  <div class="tap-hint">Tap to open</div>
+
+  <div class="open-hint">Open me ♡</div>
 </div>
 
-<!-- ───────── MAIN CONTENT ───────── -->
+<!-- ═══════════════════════════
+     MAIN PAGE
+═══════════════════════════ -->
 <div id="main">
   <div class="inner">
 
-    <div class="from-to reveal">For Sam &nbsp;·&nbsp; From Alex</div>
-    <h1 class="page-title reveal">Songs for you</h1>
+    <!-- header -->
+    <div class="kawaii-tag reveal">🌸 &nbsp;A little gift for you</div>
+    <h1 class="page-title reveal">You've got this ♡</h1>
+    <p class="page-sub reveal">がんばって — Keep going, always ✨</p>
 
-    <!-- CASSETTE -->
-    <div class="cassette-wrap reveal">
-      <svg id="cassette" viewBox="0 0 500 310" xmlns="http://www.w3.org/2000/svg">
-        <!-- Body -->
-        <rect x="8" y="8" width="484" height="282" rx="20" fill="#8fa888"/>
-        <rect x="8" y="8" width="484" height="282" rx="20" fill="none" stroke="#7a9878" stroke-width="2" opacity=".6"/>
+    <!-- ── KAWAII CASSETTE ── -->
+    <div class="tape-wrap reveal">
+      <svg id="ktape" viewBox="0 0 480 295" xmlns="http://www.w3.org/2000/svg">
 
-        <!-- Insert paper -->
-        <rect x="28" y="20" width="444" height="210" rx="12" fill="#faf7f0"/>
+        <!-- body -->
+        <rect x="6" y="6" width="468" height="275" rx="22" fill="#fde8ef"/>
+        <rect x="6" y="6" width="468" height="275" rx="22" fill="none" stroke="#f4b8cb" stroke-width="2.5"/>
 
-        <!-- Botanical leaves scattered -->
-        <!-- Left cluster -->
-        <line x1="68" y1="185" x2="68" y2="125" stroke="#b8c8a0" stroke-width="1.2"/>
-        <ellipse cx="56" cy="158" rx="10" ry="18" fill="#c8d4b0" opacity=".85" transform="rotate(-22 56 158)"/>
-        <ellipse cx="80" cy="140" rx="9"  ry="16" fill="#bccca8" opacity=".8"  transform="rotate(18 80 140)"/>
-        <ellipse cx="56" cy="120" rx="8"  ry="14" fill="#c4d0b0" opacity=".75" transform="rotate(-8 56 120)"/>
-        <ellipse cx="100" cy="55" rx="8"  ry="15" fill="#c8d4b0" opacity=".8"  transform="rotate(28 100 55)"/>
-        <ellipse cx="120" cy="40" rx="7"  ry="12" fill="#bccca8" opacity=".75" transform="rotate(-14 120 40)"/>
-        <ellipse cx="82"  cy="38" rx="6"  ry="11" fill="#c4d0b0" opacity=".7"  transform="rotate(5 82 38)"/>
+        <!-- cute corner dots -->
+        <circle cx="32"  cy="32"  r="9" fill="#f4b8cb"/>
+        <circle cx="32"  cy="32"  r="5" fill="#fff" opacity=".7"/>
+        <circle cx="448" cy="32"  r="9" fill="#f4b8cb"/>
+        <circle cx="448" cy="32"  r="5" fill="#fff" opacity=".7"/>
+        <circle cx="32"  cy="263" r="9" fill="#f4b8cb"/>
+        <circle cx="32"  cy="263" r="5" fill="#fff" opacity=".7"/>
+        <circle cx="448" cy="263" r="9" fill="#f4b8cb"/>
+        <circle cx="448" cy="263" r="5" fill="#fff" opacity=".7"/>
 
-        <!-- Right cluster -->
-        <line x1="432" y1="188" x2="432" y2="128" stroke="#b8c8a0" stroke-width="1.2"/>
-        <ellipse cx="420" cy="160" rx="10" ry="18" fill="#c8d4b0" opacity=".85" transform="rotate(20 420 160)"/>
-        <ellipse cx="444" cy="143" rx="9"  ry="16" fill="#bccca8" opacity=".8"  transform="rotate(-16 444 143)"/>
-        <ellipse cx="420" cy="122" rx="8"  ry="14" fill="#c4d0b0" opacity=".75" transform="rotate(8 420 122)"/>
-        <ellipse cx="396" cy="52" rx="8"  ry="15" fill="#c8d4b0" opacity=".8"  transform="rotate(-26 396 52)"/>
-        <ellipse cx="416" cy="38" rx="7"  ry="12" fill="#bccca8" opacity=".75" transform="rotate(12 416 38)"/>
-        <ellipse cx="450" cy="42" rx="6"  ry="11" fill="#c4d0b0" opacity=".7"  transform="rotate(-5 450 42)"/>
+        <!-- insert paper -->
+        <rect x="24" y="18" width="432" height="200" rx="14" fill="#fff9fb"/>
 
-        <!-- Top scattered -->
-        <ellipse cx="190" cy="32" rx="6" ry="11" fill="#bccca8" opacity=".7" transform="rotate(22 190 32)"/>
-        <ellipse cx="310" cy="30" rx="6" ry="11" fill="#c4d0b0" opacity=".7" transform="rotate(-18 310 30)"/>
-        <ellipse cx="205" cy="48" rx="5" ry="9"  fill="#c0ccac" opacity=".65" transform="rotate(-8 205 48)"/>
-        <ellipse cx="295" cy="45" rx="5" ry="9"  fill="#bccca8" opacity=".65" transform="rotate(12 295 45)"/>
+        <!-- sakura branch LEFT -->
+        <line x1="60" y1="185" x2="60" y2="115" stroke="#f4b8cb" stroke-width="1.4"/>
+        <ellipse cx="47"  cy="155" rx="9"  ry="17" fill="#f8d0df" opacity=".8" transform="rotate(-20 47 155)"/>
+        <ellipse cx="73"  cy="138" rx="8"  ry="15" fill="#f4c4d4" opacity=".75" transform="rotate(16 73 138)"/>
+        <ellipse cx="47"  cy="118" rx="7"  ry="13" fill="#f8ccd8" opacity=".7" transform="rotate(-8 47 118)"/>
+        <ellipse cx="92"  cy="52"  rx="7"  ry="13" fill="#f8d0df" opacity=".75" transform="rotate(25 92 52)"/>
+        <ellipse cx="110" cy="38"  rx="6"  ry="11" fill="#f4c4d4" opacity=".7" transform="rotate(-14 110 38)"/>
 
-        <!-- Label strip -->
-        <rect x="175" y="32" width="150" height="34" rx="7" fill="white" opacity=".92"/>
-        <rect x="175" y="32" width="150" height="34" rx="7" fill="none" stroke="#d4c4a0" stroke-width="1"/>
-        <text x="250" y="53" text-anchor="middle" font-family="'Playfair Display',Georgia,serif" font-size="13" fill="#5a4a3a" font-style="italic">Songs for you</text>
+        <!-- sakura small scattered -->
+        <text x="42"  y="102" font-size="11" opacity=".75">🌸</text>
+        <text x="78"  y="42"  font-size="10" opacity=".7">✿</text>
+        <text x="116" y="30"  font-size="9"  opacity=".65">🌸</text>
 
-        <!-- Left reel -->
-        <g id="rl">
-          <circle cx="155" cy="145" r="60" fill="#d0bea0"/>
-          <circle cx="155" cy="145" r="48" fill="#c4a888"/>
-          <circle cx="155" cy="145" r="36" fill="#f5f0e8"/>
-          <circle cx="155" cy="145" r="8"  fill="#5a4a3a"/>
-          <!-- Hub spokes -->
-          <line x1="155" y1="137" x2="155" y2="120" stroke="#7a6448" stroke-width="2.2"/>
-          <line x1="155" y1="153" x2="155" y2="170" stroke="#7a6448" stroke-width="2.2"/>
-          <line x1="147" y1="141" x2="133" y2="133" stroke="#7a6448" stroke-width="2.2"/>
-          <line x1="163" y1="141" x2="177" y2="133" stroke="#7a6448" stroke-width="2.2"/>
-          <line x1="147" y1="149" x2="133" y2="157" stroke="#7a6448" stroke-width="2.2"/>
-          <line x1="163" y1="149" x2="177" y2="157" stroke="#7a6448" stroke-width="2.2"/>
+        <!-- sakura branch RIGHT -->
+        <line x1="420" y1="188" x2="420" y2="118" stroke="#f4b8cb" stroke-width="1.4"/>
+        <ellipse cx="407" cy="158" rx="9"  ry="17" fill="#f8d0df" opacity=".8" transform="rotate(22 407 158)"/>
+        <ellipse cx="433" cy="140" rx="8"  ry="15" fill="#f4c4d4" opacity=".75" transform="rotate(-16 433 140)"/>
+        <ellipse cx="407" cy="120" rx="7"  ry="13" fill="#f8ccd8" opacity=".7" transform="rotate(8 407 120)"/>
+        <ellipse cx="388" cy="52"  rx="7"  ry="13" fill="#f8d0df" opacity=".75" transform="rotate(-22 388 52)"/>
+        <ellipse cx="370" cy="38"  rx="6"  ry="11" fill="#f4c4d4" opacity=".7" transform="rotate(12 370 38)"/>
+        <text x="378" y="102" font-size="11" opacity=".75">🌸</text>
+        <text x="346" y="42"  font-size="10" opacity=".7">✿</text>
+
+        <!-- top scattered -->
+        <ellipse cx="188" cy="30" rx="5" ry="10" fill="#f8ccd8" opacity=".65" transform="rotate(22 188 30)"/>
+        <ellipse cx="295" cy="28" rx="5" ry="10" fill="#f4c4d4" opacity=".65" transform="rotate(-18 295 28)"/>
+        <text x="222" y="35" font-size="9" opacity=".6">✿</text>
+        <text x="260" y="33" font-size="9" opacity=".6">🌸</text>
+
+        <!-- label strip (cute rounded) -->
+        <rect x="172" y="30" width="136" height="36" rx="18" fill="#f4b8cb" opacity=".9"/>
+        <rect x="174" y="32" width="132" height="32" rx="16" fill="#fff9fb" opacity=".85"/>
+        <text x="240" y="52" text-anchor="middle" font-family="'Nunito',sans-serif" font-size="12" font-weight="800" fill="#c05878">You've got this ♡</text>
+
+        <!-- LEFT reel (pink) -->
+        <g id="kr1">
+          <circle cx="148" cy="138" r="58" fill="#fcd8e4"/>
+          <circle cx="148" cy="138" r="46" fill="#f8c4d4"/>
+          <circle cx="148" cy="138" r="34" fill="#fff9fb"/>
+          <circle cx="148" cy="138" r="10" fill="#e8839e"/>
+          <!-- cute spokes -->
+          <line x1="148" y1="128" x2="148" y2="112" stroke="#e8839e" stroke-width="2.5" stroke-linecap="round"/>
+          <line x1="148" y1="148" x2="148" y2="164" stroke="#e8839e" stroke-width="2.5" stroke-linecap="round"/>
+          <line x1="139" y1="133" x2="125" y2="125" stroke="#e8839e" stroke-width="2.5" stroke-linecap="round"/>
+          <line x1="157" y1="133" x2="171" y2="125" stroke="#e8839e" stroke-width="2.5" stroke-linecap="round"/>
+          <line x1="139" y1="143" x2="125" y2="151" stroke="#e8839e" stroke-width="2.5" stroke-linecap="round"/>
+          <line x1="157" y1="143" x2="171" y2="151" stroke="#e8839e" stroke-width="2.5" stroke-linecap="round"/>
+          <!-- hub heart -->
+          <text x="143" y="142" font-size="10">♡</text>
         </g>
 
-        <!-- Right reel -->
-        <g id="rr">
-          <circle cx="345" cy="145" r="60" fill="#d0bea0"/>
-          <circle cx="345" cy="145" r="48" fill="#c4a888"/>
-          <circle cx="345" cy="145" r="36" fill="#f5f0e8"/>
-          <circle cx="345" cy="145" r="8"  fill="#5a4a3a"/>
-          <line x1="345" y1="137" x2="345" y2="120" stroke="#7a6448" stroke-width="2.2"/>
-          <line x1="345" y1="153" x2="345" y2="170" stroke="#7a6448" stroke-width="2.2"/>
-          <line x1="337" y1="141" x2="323" y2="133" stroke="#7a6448" stroke-width="2.2"/>
-          <line x1="353" y1="141" x2="367" y2="133" stroke="#7a6448" stroke-width="2.2"/>
-          <line x1="337" y1="149" x2="323" y2="157" stroke="#7a6448" stroke-width="2.2"/>
-          <line x1="353" y1="149" x2="367" y2="157" stroke="#7a6448" stroke-width="2.2"/>
+        <!-- RIGHT reel (lavender) -->
+        <g id="kr2">
+          <circle cx="332" cy="138" r="58" fill="#e4d8f8"/>
+          <circle cx="332" cy="138" r="46" fill="#d8c8f4"/>
+          <circle cx="332" cy="138" r="34" fill="#fff9fb"/>
+          <circle cx="332" cy="138" r="10" fill="#b090d8"/>
+          <line x1="332" y1="128" x2="332" y2="112" stroke="#b090d8" stroke-width="2.5" stroke-linecap="round"/>
+          <line x1="332" y1="148" x2="332" y2="164" stroke="#b090d8" stroke-width="2.5" stroke-linecap="round"/>
+          <line x1="323" y1="133" x2="309" y2="125" stroke="#b090d8" stroke-width="2.5" stroke-linecap="round"/>
+          <line x1="341" y1="133" x2="355" y2="125" stroke="#b090d8" stroke-width="2.5" stroke-linecap="round"/>
+          <line x1="323" y1="143" x2="309" y2="151" stroke="#b090d8" stroke-width="2.5" stroke-linecap="round"/>
+          <line x1="341" y1="143" x2="355" y2="151" stroke="#b090d8" stroke-width="2.5" stroke-linecap="round"/>
+          <text x="327" y="142" font-size="10">♡</text>
         </g>
 
-        <!-- Tape bridge -->
-        <path d="M 195 148 Q 250 170 305 148" stroke="#4a3a2a" stroke-width="7" fill="none" stroke-linecap="round"/>
+        <!-- tape bridge -->
+        <path d="M 188 142 Q 240 162 292 142" stroke="#e8839e" stroke-width="6" fill="none" stroke-linecap="round"/>
 
-        <!-- Flower decorations at bottom of insert -->
-        <text x="215" y="210" font-size="22" opacity=".88">🌸</text>
-        <text x="242" y="204" font-size="16" opacity=".85">🎀</text>
-        <text x="264" y="212" font-size="20" opacity=".88">🌼</text>
-        <text x="290" y="207" font-size="14" opacity=".8">🌿</text>
+        <!-- cute sticker decorations bottom -->
+        <text x="200" y="202" font-size="20">🌸</text>
+        <text x="226" y="196" font-size="14">⭐</text>
+        <text x="246" y="204" font-size="18">🌷</text>
+        <text x="272" y="198" font-size="14">✨</text>
+        <text x="291" y="205" font-size="16">🌸</text>
 
-        <!-- Corner screws -->
-        <circle cx="32"  cy="32"  r="7" fill="#7a9070"/>
-        <line x1="28" y1="32" x2="36" y2="32" stroke="#5a7050" stroke-width="1.5"/>
-        <line x1="32" y1="28" x2="32" y2="36" stroke="#5a7050" stroke-width="1.5"/>
-        <circle cx="468" cy="32"  r="7" fill="#7a9070"/>
-        <line x1="464" y1="32" x2="472" y2="32" stroke="#5a7050" stroke-width="1.5"/>
-        <line x1="468" y1="28" x2="468" y2="36" stroke="#5a7050" stroke-width="1.5"/>
-        <circle cx="32"  cy="275" r="7" fill="#7a9070"/>
-        <line x1="28" y1="275" x2="36" y2="275" stroke="#5a7050" stroke-width="1.5"/>
-        <line x1="32" y1="271" x2="32" y2="279" stroke="#5a7050" stroke-width="1.5"/>
-        <circle cx="468" cy="275" r="7" fill="#7a9070"/>
-        <line x1="464" y1="275" x2="472" y2="275" stroke="#5a7050" stroke-width="1.5"/>
-        <line x1="468" y1="271" x2="468" y2="279" stroke="#5a7050" stroke-width="1.5"/>
+        <!-- bottom cute buttons -->
+        <rect x="185" y="236" width="22" height="14" rx="7" fill="#f4b8cb"/>
+        <rect x="229" y="234" width="22" height="16" rx="8" fill="#c8b4e8"/>
+        <rect x="273" y="236" width="22" height="14" rx="7" fill="#a8ddc4"/>
 
-        <!-- Bottom buttons -->
-        <rect x="188" y="248" width="20" height="13" rx="4" fill="#7060a0" opacity=".88"/>
-        <rect x="240" y="246" width="20" height="15" rx="4" fill="#3a3230" opacity=".85"/>
-        <rect x="292" y="248" width="20" height="13" rx="4" fill="#7060a0" opacity=".88"/>
-
-        <!-- Tape window slot -->
-        <rect x="213" y="233" width="74" height="9" rx="4.5" fill="#3a3230" opacity=".55"/>
+        <!-- tape window (cute) -->
+        <rect x="210" y="220" width="60" height="10" rx="5" fill="#f4b8cb" opacity=".6"/>
       </svg>
     </div>
 
-    <!-- BOTTOM GRID -->
-    <div class="grid2 reveal">
+    <!-- ── STICKERS ROW ── -->
+    <div class="stickers reveal">
+      <div class="sticker">🌸 You're enough</div>
+      <div class="sticker">✨ Keep shining</div>
+      <div class="sticker">💪 So brave</div>
+      <div class="sticker">🌷 Loved always</div>
+    </div>
+
+    <!-- ── CARDS GRID ── -->
+    <div class="cards-grid reveal">
+
       <!-- PLAYLIST -->
-      <div>
+      <div class="playlist-card">
+        <div class="playlist-title">🎵 Songs for you</div>
+
         <div class="track" onclick="play(0)">
           <span class="track-num">01</span>
           <div class="track-info">
             <div class="track-name">Wonderwall</div>
-            <div class="track-artist">Oasis</div>
+            <div class="track-mood">You'll make it through 🌿</div>
           </div>
           <button class="pbtn" id="b0">▶</button>
         </div>
+
         <div class="track" onclick="play(1)">
           <span class="track-num">02</span>
           <div class="track-info">
-            <div class="track-name">Don't Look Back in Anger</div>
-            <div class="track-artist">Oasis</div>
+            <div class="track-name">Don't Look Back</div>
+            <div class="track-mood">Let go & move forward 🌸</div>
           </div>
           <button class="pbtn" id="b1">▶</button>
         </div>
+
         <div class="track" onclick="play(2)">
           <span class="track-num">03</span>
           <div class="track-info">
             <div class="track-name">Live Forever</div>
-            <div class="track-artist">Oasis</div>
+            <div class="track-mood">You are infinite ✨</div>
           </div>
           <button class="pbtn" id="b2">▶</button>
         </div>
+
         <div class="track" onclick="play(3)">
           <span class="track-num">04</span>
           <div class="track-info">
             <div class="track-name">Champagne Supernova</div>
-            <div class="track-artist">Oasis</div>
+            <div class="track-mood">Dream as big as the sky 🌙</div>
           </div>
           <button class="pbtn" id="b3">▶</button>
         </div>
+
         <div class="track" onclick="play(4)">
           <span class="track-num">05</span>
           <div class="track-info">
             <div class="track-name">Half the World Away</div>
-            <div class="track-artist">Oasis</div>
+            <div class="track-mood">I believe in you 💛</div>
           </div>
           <button class="pbtn" id="b4">▶</button>
         </div>
+
         <div class="np-label" id="np"></div>
       </div>
 
       <!-- LINER NOTE -->
-      <div class="liner">
-        <div class="liner-label">Liner Note</div>
-        <div class="liner-body">
+      <div class="note-card">
+        <div class="washi"></div>
+        <div class="note-label">💌 &nbsp;A Note for You</div>
+        <div class="note-body">
           Hey you,<br><br>
-          I made you a mixtape —<br>
-          the cassette kind, not a<br>
-          CD player.<br><br>
-          Side A is us laughing.<br>
-          Side B is me missing<br>
-          you already.<br><br>
-          Press play. 🌿
+          I know things have<br>
+          been hard lately.<br><br>
+          But you are braver<br>
+          than you believe,<br>
+          and more loved<br>
+          than you know.<br><br>
+          Keep going. 🌸
         </div>
       </div>
+
     </div>
 
-    <!-- BOUQUET -->
-    <div class="bouquet-section reveal">
-      <div class="bouquet-label-top">Your bouquet &nbsp;·&nbsp; From the sender</div>
-      <button class="bouquet-btn" onclick="bloom(event)" aria-label="Bloom flowers">
-        <span class="bouquet-emoji" id="bqEmoji">💐</span>
-        <span class="bouquet-tap">Tap to bloom</span>
+    <!-- ── SAKURA BUTTON ── -->
+    <div class="sakura-section reveal">
+      <div class="sakura-sub">🌸 A bouquet of courage · tap to bloom</div>
+      <button class="sakura-btn" onclick="sakuraBoom(event)" aria-label="Bloom sakura">
+        <span class="sakura-emoji" id="sakEmo">🌸</span>
+        <span class="sakura-hint">Tap ♡</span>
       </button>
     </div>
 
-  </div><!-- /inner -->
-</div><!-- /main -->
+  </div>
+</div>
 
-<!-- Hidden YouTube target -->
+<!-- hidden YT -->
 <div id="yt"></div>
 
 <script>
-// ──────────────────────────────────────
-// FLOWER / PETAL BURST
-// ──────────────────────────────────────
-const PETALS = ['🌸','🌺','🌼','🌷','🌹','🌻','🪷','💮','✿','🌸','🌺','🌼'];
+// ──────────────────────────────────
+// BG FALLING SAKURA
+// ──────────────────────────────────
+const bgBox = document.getElementById('bgPetals');
+const BG_PETALS = ['🌸','✿','🌷','🌸','🌸'];
+for(let i=0;i<18;i++){
+  const el=document.createElement('div');
+  el.className='bg-petal';
+  el.textContent=BG_PETALS[Math.floor(Math.random()*BG_PETALS.length)];
+  el.style.cssText=`
+    left:${Math.random()*100}vw;
+    animation-duration:${7+Math.random()*8}s;
+    animation-delay:${Math.random()*8}s;
+    font-size:${.7+Math.random()*.8}rem;
+  `;
+  bgBox.appendChild(el);
+}
 
-function burst(x, y, n = 10) {
-  const box = document.getElementById('petals');
-  for (let i = 0; i < n; i++) {
-    const el = document.createElement('span');
-    el.className = 'petal';
-    el.textContent = PETALS[Math.floor(Math.random() * PETALS.length)];
-    const angle  = (360 / n) * i + (Math.random() - .5) * 40;
-    const dist   = 55 + Math.random() * 120;
-    const rad    = angle * Math.PI / 180;
-    el.style.cssText = `
-      left:${x}px; top:${y}px;
-      font-size:${.9 + Math.random() * 1.2}rem;
-      --tx:${(Math.cos(rad) * dist).toFixed(1)}px;
-      --ty:${(Math.sin(rad) * dist).toFixed(1)}px;
-      --tr:${(Math.random() * 540 - 270).toFixed(0)}deg;
-      animation-delay:${(Math.random() * .1).toFixed(2)}s;
+// ──────────────────────────────────
+// PETAL BURST
+// ──────────────────────────────────
+const PETALS=['🌸','🌷','✿','🌺','💮','🌸','⭐','💫','✨','🌸'];
+const box=document.getElementById('burstBox');
+
+function burst(x,y,n=10){
+  for(let i=0;i<n;i++){
+    const el=document.createElement('span');
+    el.className='burst';
+    el.textContent=PETALS[Math.floor(Math.random()*PETALS.length)];
+    const ang=(360/n)*i+(Math.random()-.5)*36;
+    const d=55+Math.random()*110;
+    const rad=ang*Math.PI/180;
+    el.style.cssText=`
+      left:${x}px;top:${y}px;
+      font-size:${.8+Math.random()*1.1}rem;
+      --bx:${(Math.cos(rad)*d).toFixed(1)}px;
+      --by:${(Math.sin(rad)*d).toFixed(1)}px;
+      --br:${(Math.random()*480-240).toFixed(0)}deg;
+      animation-delay:${(Math.random()*.08).toFixed(2)}s;
     `;
     box.appendChild(el);
-    setTimeout(() => el.remove(), 1500);
+    setTimeout(()=>el.remove(),1400);
   }
 }
 
-// click anywhere on main → burst small flowers
-document.addEventListener('click', e => {
-  if (e.target.closest('#env-screen')) return;
-  burst(e.clientX, e.clientY, 7);
+// click anywhere on main
+document.addEventListener('click',e=>{
+  if(e.target.closest('#gift-screen')) return;
+  burst(e.clientX,e.clientY,7);
 });
 
-// ──────────────────────────────────────
-// ENVELOPE OPEN
-// ──────────────────────────────────────
-function openEnvelope(e) {
-  const screen = document.getElementById('env-screen');
-  const main   = document.getElementById('main');
-  // burst from click point
-  burst(e.clientX, e.clientY, 22);
-  screen.classList.add('fade-out');
-  setTimeout(() => {
-    screen.style.display = 'none';
+// ──────────────────────────────────
+// GIFT BOX OPEN
+// ──────────────────────────────────
+function openGift(e){
+  const screen=document.getElementById('gift-screen');
+  const main=document.getElementById('main');
+  burst(e.clientX,e.clientY,26);
+  screen.classList.add('bye');
+  setTimeout(()=>{
+    screen.style.display='none';
     main.classList.add('show');
-    // trigger scroll reveals
-    setTimeout(doReveal, 200);
-  }, 850);
+    setTimeout(doReveal,200);
+  },820);
 }
 
-// ──────────────────────────────────────
+// ──────────────────────────────────
 // SCROLL REVEAL
-// ──────────────────────────────────────
-function doReveal() {
-  const io = new IntersectionObserver(entries => {
-    entries.forEach((en, i) => {
-      if (en.isIntersecting) {
-        setTimeout(() => en.target.classList.add('in'), i * 120);
+// ──────────────────────────────────
+function doReveal(){
+  const io=new IntersectionObserver(entries=>{
+    entries.forEach((en,i)=>{
+      if(en.isIntersecting){
+        setTimeout(()=>en.target.classList.add('in'),i*110);
         io.unobserve(en.target);
       }
     });
-  }, { threshold: 0.1 });
-  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+  },{threshold:.1});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 }
 
-// ──────────────────────────────────────
+// ──────────────────────────────────
 // YOUTUBE PLAYER
-// ──────────────────────────────────────
-const TRACKS = [
-  { title:'Wonderwall',              ytId:'bx1Bh8ZvH84' },
-  { title:"Don't Look Back in Anger", ytId:'cmpDDYFRBGk' },
-  { title:'Live Forever',             ytId:'EaTL_dKnCHg' },
-  { title:'Champagne Supernova',      ytId:'tI-5uKae6qc' },
-  { title:'Half the World Away',      ytId:'ZXl-2Fn4Ubs' },
+// ──────────────────────────────────
+const TRACKS=[
+  {title:'Wonderwall',           ytId:'bx1Bh8ZvH84'},
+  {title:"Don't Look Back in Anger", ytId:'cmpDDYFRBGk'},
+  {title:'Live Forever',         ytId:'EaTL_dKnCHg'},
+  {title:'Champagne Supernova',  ytId:'tI-5uKae6qc'},
+  {title:'Half the World Away',  ytId:'ZXl-2Fn4Ubs'},
 ];
+let ytp=null,ytReady=false,cur=-1,isPlay=false;
+const tape=document.getElementById('ktape');
 
-let ytp = null, ytReady = false, cur = -1, playing = false;
-const cassette = document.getElementById('cassette');
-
-function loadYTAPI() {
-  if (document.getElementById('ytapi')) return;
-  const s = document.createElement('script');
-  s.id  = 'ytapi';
-  s.src = 'https://www.youtube.com/iframe_api';
+function loadYT(){
+  if(document.getElementById('ytapi'))return;
+  const s=document.createElement('script');
+  s.id='ytapi'; s.src='https://www.youtube.com/iframe_api';
   document.head.appendChild(s);
 }
-
-window.onYouTubeIframeAPIReady = () => {
-  ytReady = true;
-  ytp = new YT.Player('yt', {
-    height:'0', width:'0',
-    playerVars:{ autoplay:0, controls:0 },
-    events:{ onStateChange(e) {
-      const S = YT.PlayerState;
-      if (e.data === S.PLAYING) {
-        playing = true;
-        cassette.classList.add('playing');
-      }
-      if (e.data === S.PAUSED || e.data === S.ENDED) {
-        playing = false;
-        cassette.classList.remove('playing');
-      }
-      if (e.data === S.ENDED) play((cur + 1) % TRACKS.length);
+window.onYouTubeIframeAPIReady=()=>{
+  ytReady=true;
+  ytp=new YT.Player('yt',{
+    height:'0',width:'0',
+    playerVars:{autoplay:0,controls:0},
+    events:{onStateChange(e){
+      const S=YT.PlayerState;
+      if(e.data===S.PLAYING){isPlay=true;tape.classList.add('playing');}
+      if(e.data===S.PAUSED||e.data===S.ENDED){isPlay=false;tape.classList.remove('playing');}
+      if(e.data===S.ENDED) play((cur+1)%TRACKS.length);
     }}
   });
 };
 
-function play(idx) {
-  loadYTAPI();
-  // reset buttons
-  TRACKS.forEach((_, i) => {
-    const b = document.getElementById(`b${i}`);
-    if (b) { b.textContent = '▶'; b.classList.remove('on'); }
+function play(idx){
+  loadYT();
+  TRACKS.forEach((_,i)=>{
+    const b=document.getElementById(`b${i}`);
+    if(b){b.textContent='▶';b.classList.remove('on');}
   });
-
-  if (cur === idx && playing) {
-    ytp?.pauseVideo();
-    playing = false; cur = -1;
-    cassette.classList.remove('playing');
-    document.getElementById('np').textContent = '';
+  if(cur===idx&&isPlay){
+    ytp?.pauseVideo(); isPlay=false; cur=-1;
+    tape.classList.remove('playing');
+    document.getElementById('np').textContent='';
     return;
   }
-
-  cur = idx;
-  const t = TRACKS[idx];
-  const btn = document.getElementById(`b${idx}`);
-  if (btn) { btn.textContent = '⏸'; btn.classList.add('on'); }
-  document.getElementById('np').textContent = `Playing: ${t.title} — Oasis`;
-
-  if (ytReady && ytp) {
-    ytp.loadVideoById(t.ytId);
-    ytp.playVideo();
+  cur=idx;
+  const t=TRACKS[idx];
+  const btn=document.getElementById(`b${idx}`);
+  if(btn){btn.textContent='⏸';btn.classList.add('on');}
+  document.getElementById('np').textContent=`♪ ${t.title} — Oasis`;
+  if(ytReady&&ytp){
+    ytp.loadVideoById(t.ytId); ytp.playVideo();
   } else {
-    setTimeout(() => {
-      if (ytReady && ytp) { ytp.loadVideoById(t.ytId); ytp.playVideo(); }
-      else window.open(`https://www.youtube.com/watch?v=${t.ytId}`, '_blank');
-    }, 1800);
+    setTimeout(()=>{
+      if(ytReady&&ytp){ytp.loadVideoById(t.ytId);ytp.playVideo();}
+      else window.open(`https://www.youtube.com/watch?v=${t.ytId}`,'_blank');
+    },1800);
   }
 }
 
-// ──────────────────────────────────────
-// BOUQUET BLOOM
-// ──────────────────────────────────────
-function bloom(e) {
+// ──────────────────────────────────
+// SAKURA BOOM
+// ──────────────────────────────────
+function sakuraBoom(e){
   e.stopPropagation();
-  const r   = e.currentTarget.getBoundingClientRect();
-  const cx  = r.left + r.width  / 2;
-  const cy  = r.top  + r.height / 2;
-  burst(cx, cy, 28);
-
-  const em = document.getElementById('bqEmoji');
-  em.style.transform   = 'scale(1.6) rotate(10deg)';
-  em.style.transition  = 'transform .25s cubic-bezier(.34,1.56,.64,1)';
-  setTimeout(() => { em.style.transform = ''; }, 500);
+  const r=e.currentTarget.getBoundingClientRect();
+  burst(r.left+r.width/2, r.top+r.height/2, 32);
+  const em=document.getElementById('sakEmo');
+  em.style.transform='scale(1.7) rotate(15deg)';
+  em.style.transition='transform .25s cubic-bezier(.34,1.56,.64,1)';
+  setTimeout(()=>{em.style.transform='';},550);
 }
 
-// Also burst from cassette click
-document.getElementById('cassette').addEventListener('click', e => {
-  const r = e.currentTarget.getBoundingClientRect();
-  burst(r.left + r.width/2, r.top + r.height/2, 14);
+// tape click → burst
+tape.addEventListener('click',e=>{
+  const r=e.currentTarget.getBoundingClientRect();
+  burst(r.left+r.width/2,r.top+r.height/2,14);
 });
 </script>
 </body>
